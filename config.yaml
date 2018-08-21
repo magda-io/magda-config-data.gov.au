@@ -5,37 +5,37 @@ global:
   ## all run in separate pods unless some managed postgres solution (e.g.
   ## useCloudSql) is specified elsewhere.
   ## Running in separate pods scales better, but requires more resources
-  # useCombinedDb: true
+  useCombinedDb: false
 
   ## Whether to use the Google Cloud SQL managed postgres solution. Only set 
   ## this to true if you already have cloud sql set up and be sure to look at
   ## settings for the cloud-sql-proxy service below.
-  # useCloudSql: false
+  useCloudSql: true
 
   ## The external URL of the installation, e.g. "https://search.data.gov.au".
   ## This is used in a number of places, including linking back to the site
   ## from emails, creating a absolute sitemap URL for robots.txt, etc.
-  externalUrl: https://example.com
+  externalUrl: https://search.data.gov.au
 
   ## How to handle rolling updates during a deployment. If set to 0, kubernetes
   ## will happily take down pods while it replaces them (useful for dev setups).
   ## If set to 1, kubernetes will make sure one pod is available to take requests
   ## during upgrades. 0 by default.
-  # rollingUpdate:
-  #   maxUnavailable: 0
+  rollingUpdate:
+    maxUnavailable: 1
 
   image:
     ## What tag of the magda images to get. Look at 
     ## for versions. https://github.com/magda-io/magda/releases/latest.
     ## By default this is the same version as the helm chart.
-    # tag: 
+    tag: "0.0.46-RC1"
     ## The docker repository to get the images from - defaults to the official
     ## data61 docker hub repo
     # repository: data61
     ## The imagePullPolicy to use for images - generally unless you're actively
     ## trying to track development this should be "IfNotPresent", otherwise if 
     ## you are it can be "Always". Defaults to "IfNotPresent"
-    # pullPolicy: IfNotPresent
+    pullPolicy: IfNotPresent
     ## Kubernetes secret to use if you're fetching images from a private repository
     # imagePullSecret: ""
 
@@ -47,7 +47,7 @@ global:
   ## Whether to enable kubernetes liveness probes - these continually hit pods in
   ## order to see whether they're still alive and restart them upon too many failures.
   ## This is essential for prod, but tends to create a lot of overhead in development
-  # enableLivenessProbes: false
+  enableLivenessProbes: true
 
   ## The admin to use as the root admin user in the database. Defaults to the very first
   ## uuidv4
@@ -93,7 +93,7 @@ tags:
   ## Whether to use an ingress, which is necessary for HTTPS and using the Google CDN with
   ## Google Kubernetes Engine. By default this is off, and access is provided to the cluster
   ## through a Kubernetes LoadBalancer service
-  # ingress: false
+  ingress: true
   
   ## Sleuthers, which listen to changes in the registry and add extra metadata
   sleuther-broken-link: true
@@ -104,19 +104,19 @@ tags:
 ## These are the external jobs that pull data in from other data portals. A default is provided here for you.
 connectors:
   ## Whether to run an initial job to crawl all these on install
-  # includeInitialJobs: true
+  includeInitialJobs: false
 
   ## Whether to run recurring jobs on the schedule specified per connector.
-  # includeCronJobs: true
+  includeCronJobs: true
 
   ## They can also have their resource requirements customised individually as per
   ## https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/ like so:
-  # resources:
-    # requests:
-      # cpu: 0m
-      # memory: 0Mi
-    # limits:
-      # cpu: 0m
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 200m
       # memory: 0Mi
 
   ## You can also set image details (except name) for all connectors at this level - this will override
@@ -127,48 +127,239 @@ connectors:
     # imagePullSecret: ""
 
   config:
-      ## The service's image as per the global options under "global.image", but with a "name "
-      ## currently available are magda-ckan-connector, magda-project-open-data-connector and magda-csw-connector
+  #     ## The service's image as per the global options under "global.image", but with a "name "
+  #     ## currently available are magda-ckan-connector, magda-project-open-data-connector and magda-csw-connector
+  #   - image:
+  #       name: "magda-ckan-connector"
+  #       # tag: vx.x.x
+  #       # pullPolicy: IfNotPresent
+  #       # imagePullSecret: ""
+
+  #     ## Unique id to identify this connector and records that are harvested from it
+  #     id: dga
+  #     ## Friendly readable name
+  #     name: "data.gov.au"
+  #     ## The base URL of the place to source data from
+  #     sourceUrl: "https://data.gov.au/"
+  #     ## When crawling through from beginning to end, how big should the individual requests be in records?
+  #     pageSize: 1000
+  #     ## Crontab schedule for how often this should happen. 
+  #     schedule: "0 * * * *"
+  #     ## CKAN-specific config: what harvest sources to ignore. * will ignore everything that's been harvested
+  #     ## from another portal
+  #     ignoreHarvestSources: ["*"]
     - image:
-        name: "magda-ckan-connector"
-        # tag: vx.x.x
-        # pullPolicy: IfNotPresent
-        # imagePullSecret: ""
-
-      ## Unique id to identify this connector and records that are harvested from it
+        name: magda-project-open-data-connector
+      id: act
+      name: ACT Government data.act.gov.au
+      sourceUrl: http://www.data.act.gov.au/data.json
+      schedule: 0 0 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: aims
+      name: Australian Institute of Marine Science
+      sourceUrl: http://data.aims.gov.au/geonetwork/srv/eng/csw
+      pageSize: 100
+      schedule: 0 1 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: aodn
+      name: Australian Oceans Data Network
+      sourceUrl: http://catalogue.aodn.org.au/geonetwork/srv/eng/csw
+      pageSize: 100
+      schedule: 30 1 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: bom
+      name: Bureau of Meteorology
+      sourceUrl: http://www.bom.gov.au/geonetwork/srv/eng/csw
+      pageSize: 100
+      schedule: 0 13 */3 * *
+    - image:
+        name: magda-ckan-connector
+      id: brisbane
+      name: Brisbane City Council
+      sourceUrl: https://www.data.brisbane.qld.gov.au/data/
+      pageSize: 100
+      schedule: 10 * * * *
+    - image:
+        name: magda-project-open-data-connector
+      id: hobart
+      name: City of Hobart Open Data Portal
+      sourceUrl: http://data-1-hobartcc.opendata.arcgis.com/data.json
+      schedule: 30 2 */3 * *
+    - image:
+        name: magda-project-open-data-connector
+      id: launceston
+      name: City of Launceston Open Data
+      sourceUrl: https://data-launceston.opendata.arcgis.com/data.json
+      schedule: 0 3 */3 * *
+    - image:
+        name: magda-dap-connector
+      id: dap
+      name: CSIRO
+      sourceUrl: https://data.csiro.au/dap/ws/v2/
+      pageSize: 100
+      schedule: 30 12 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: marlin
+      name: CSIRO Marlin
+      sourceUrl: http://www.marlin.csiro.au/geonetwork/srv/eng/csw
+      pageSize: 50
+      schedule: 30 3 */3 * *
+    - image:
+        name: magda-ckan-connector
       id: dga
-      ## Friendly readable name
-      name: "data.gov.au"
-      ## The base URL of the place to source data from
-      sourceUrl: "https://data.gov.au/"
-      ## When crawling through from beginning to end, how big should the individual requests be in records?
+      name: data.gov.au
+      sourceUrl: https://data.gov.au/
       pageSize: 1000
-      ## Crontab schedule for how often this should happen. 
-      schedule: "0 * * * *"
-      ## CKAN-specific config: what harvest sources to ignore. * will ignore everything that's been harvested
-      ## from another portal
-      ignoreHarvestSources: ["*"]
-
+      schedule: 0 * * * *
+      ignoreHarvestSources:
+        - "*"
+    - image:
+        name: magda-csw-connector
+      id: environment
+      name: Department of the Environment and Energy
+      sourceUrl: http://www.environment.gov.au/fed/csw
+      pageSize: 100
+      schedule: 30 13 */3 * *
+    - image:
+        name: magda-project-open-data-connector
+      id: esta
+      name: ESTA Open Data
+      sourceUrl: http://data-esta000.opendata.arcgis.com/data.json
+      schedule: 30 4 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: ga
+      name: Geoscience Australia
+      sourceUrl: http://www.ga.gov.au/geonetwork/srv/en/csw
+      pageSize: 100
+      schedule: 0 5 */3 * *
+    - image:
+        name: magda-project-open-data-connector
+      id: logan
+      name: Logan City Council
+      sourceUrl: http://data-logancity.opendata.arcgis.com/data.json
+      schedule: 30 5 */3 * *
+    - image:
+        name: magda-project-open-data-connector
+      id: melbourne
+      name: Melbourne Data
+      sourceUrl: https://data.melbourne.vic.gov.au/data.json
+      schedule: 0 6 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: mrt
+      name: Mineral Resources Tasmania
+      sourceUrl: http://www.mrt.tas.gov.au/web-catalogue/srv/eng/csw
+      pageSize: 100
+      schedule: 30 6 */3 * *
+    - image:
+        name: magda-project-open-data-connector
+      id: moretonbay
+      name: Moreton Bay Regional Council Data Portal
+      sourceUrl: http://data.moretonbay.qld.gov.au/data.json
+      schedule: 0 7 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: metoc
+      name: 'Navy Meteorology and Oceanography (METOC) '
+      sourceUrl: http://www.metoc.gov.au/geonetwork/srv/en/csw
+      pageSize: 100
+      schedule: 0 8 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: neii
+      name: National Environmental Information Infrastructure
+      sourceUrl: http://neii.bom.gov.au/services/catalogue/csw
+      pageSize: 100
+      schedule: 30 7 */3 * *
+    - image:
+        name: magda-ckan-connector
+      id: nsw
+      name: New South Wales Government
+      sourceUrl: https://data.nsw.gov.au/data/
+      pageSize: 100
+      schedule: 20 * * * *
+    - image:
+        name: magda-csw-connector
+      id: sdinsw
+      name: NSW Land and Property
+      sourceUrl: https://sdi.nsw.gov.au/csw
+      pageSize: 100
+      schedule: 0 9 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: qspatial
+      name: 'Queensland Spatial Catalogue - QSpatial '
+      sourceUrl: "http://qldspatial.information.qld.gov.au/catalogueadmin/csw"
+      pageSize: 100
+      schedule: 0 14 */3 * *
+    - image:
+        name: magda-ckan-connector
+      id: qld
+      name: Queensland Government
+      sourceUrl: https://data.qld.gov.au/
+      pageSize: 100
+      schedule: 30 * * * *
+    - image:
+        name: magda-ckan-connector
+      id: sa
+      name: South Australia Government
+      sourceUrl: https://data.sa.gov.au/data/
+      pageSize: 100
+      schedule: 40 * * * *
+    - image:
+        name: magda-csw-connector
+      id: listtas
+      name: Tasmania TheList
+      sourceUrl: https://data.thelist.tas.gov.au:443/datagn/srv/eng/csw
+      pageSize: 100
+      schedule: 30 10 */3 * *
+    - image:
+        name: magda-csw-connector
+      id: tern
+      name: Terrestrial Ecosystem Research Network
+      sourceUrl: http://data.auscover.org.au/geonetwork/srv/eng/csw
+      pageSize: 100
+      schedule: 0 11 */3 * *
+    - image:
+        name: magda-ckan-connector
+      id: vic
+      name: Victoria Government
+      sourceUrl: https://www.data.vic.gov.au/data/
+      pageSize: 100
+      schedule: 50 * * * *
+    - image:
+        name: magda-ckan-connector
+      id: wa
+      name: Western Australia Government
+      sourceUrl: http://catalogue.beta.data.wa.gov.au/
+      pageSize: 100
+      schedule: 55 * * * *
 
 ## Settings for the ingress. You need one of these if you want to do SSL or use the Google CDN on GKE
 ## Otherwise using the built-in Kubernetes LoadBalancer works ok.
-# ingress:
+ingress:
   ## The hostname of the site
-  # hostname: search.data.gov.au
+  hostname: search.data.gov.au
   ## The name of the external ip to use - used when using the GCE ingress type
-  # ipName: search-data-gov-au-ingress
+  ipName: search-data-gov-au-ingress
   ## The class of the ingress - if running on GKE, gce will automatically work, otherwise you
   ## can use "nginx" which requires extra setup
-  # ingressClass: gce
+  ingressClass: gce
   ## Whether to enable TLS - requires a TLS secret to be set: 
   ## https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
-  # enableTls: false
+  enableTls: true
   ## Name of the tls secret, defaults to "magda-cert-tls"
-  # tlsSecretName: "magda-cert-tls"
+  tlsSecretName: "magda-cert-tls"
   ## Domains to attempt to obtain an SSL certificate for from let's encrypt, if using certmanager
   ## (requires extra setup)
-  # domains:
-  #   - example.com
+  domains:
+    - search.data.gov.au
+    - letest.search.data.gov.au
 
 ## Below are individual settings for services. All services can be customised as follows:
 # servicename:
@@ -234,15 +425,22 @@ connectors:
 # apidoc-server:
 
 ## Settings for the authorization-api, which determines what each user's permissions are:
-# authorization-api:
+authorization-api:
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
 
 ## Settings for the authorization-db, which serves the authorization-api
 # authorization-db:
 
 ## A pod for proxying to Google Cloud SQL, the GCE managed database service.
-# cloud-sql-proxy:
+cloud-sql-proxy:
+  replicas: 2
+
   ## The cloud sql instance to connect to
-  # instanceConnectionName: project:region:instanceid
+  instanceConnectionName: terriajs:australia-southeast1:magda-prod
 
 ## A pod that combines all the databases if global.useCombinedDb is set to true
 # combined-db:
@@ -255,22 +453,31 @@ connectors:
 
 ## A service that renders emails and forwards them to an SMTP server
 correspondence-api:
+  replicas: 2
+
   ## The default recipient to email when there's no other choice - e.g. when asking a
   ## question about a dataset for which there's no organisational email
-  defaultRecipient: "test@example.com"
+  defaultRecipient: "data@digital.gov.au"
 
   ## The hostname of the SMTP server to use - the password should be in a secret
-  smtpHostname: "example.com"
+  smtpHostname: "smtp.mailgun.org"
 
   ## The SMTP port to use - beware, default SMTP ports are blocked on most cloud 
   ## providers
-  smtpPort: 80
+  smtpPort: 2525
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 200m
 
 ## The elasticsearch setup - this can consist of up to three different kinds of pods -
 ## data nodes, master nodes and client nodes.
-# elasticsearch:
+elasticsearch:
   ## Whether to use client and master nodes, or just use data nodes.
-  # production: true
+  production: true
 
   ## All three kinds of nodes can be customised with these settings like so:
   # nodetype:
@@ -283,39 +490,64 @@ correspondence-api:
   ## and is the only kind of node that's strictly necessary. You can have multiple
   ## replicas of these, they will discover each other and balance shards and replicas
   ## between them.
-  # data:
+  data:
+    heapSize: 3000m
+    # pluginsInstall: "repository-gcs" disabled until es backups are readded
+    storageClass: "fast-ssd"
+    resources:
+      requests:
+        cpu: 800m
+        memory: 5000Mi
+      limits:
+        cpu: 1500m
 
   ## Settings for the client nodes - this accepts HTTP connections from search-api and
   ## indexer and forwards them to the data nodes.
-  # client:
+  client:
+    replicas: 2
+    heapSize: 900m
+    # pluginsInstall: "repository-gcs" disabled until es backups are readded
+    resources:
+      requests:
+        cpu: 200m
+        memory: 1500Mi
+      limits:
+        cpu: 400m
   
   ## Settings for the master nodes - these keep track of the data nodes as they go up
   ## and down and keep track of what the current state of the data should be.
-  # master:
+  master:
+    # pluginsInstall: "repository-gcs" disabled until es backups are readded
+    resources:
+      requests:
+        cpu: 200m
+        memory: 1500Mi
+      limits:
+        cpu: 400m
 
 ## The gateway accepts incoming connections and directs them to the appropriate api pod,
 ## or the web server pod
 gateway:
-  service:
+  # service:
     ## The type of kubernetes service to use for the gateway - set to LoadBalancer to
     ## expose an external IP, or leave blank if using an ingress
-    type: LoadBalancer
+    # type: LoadBalancer
 
     ## If using a LoadBalancer, the IP to try to use. Leave unset to get an automatic one
     # loadBalancerIP: 
 
   ## If replacing a CKAN installation with Magda, this will redirect CKAN paths without
   ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
-  # ckanRedirectionDomain: "example.com"
+  ckanRedirectionDomain: "ckan.data.gov.au"
 
   ## Configure the autoscaler
-  # autoscaler:
+  autoscaler:
     ## whether to enable autoscaling
-    # enabled: false
+    enabled: true
     ## The minimum number of replicas to have
-    # minReplicas: 2
+    minReplicas: 2
     ## The maximum number of replicas to have
-    # maxReplicas: 4
+    maxReplicas: 4
 
   ## Client ids to use for OAuth authentication
   # auth:
@@ -326,11 +558,40 @@ gateway:
 
   ## Configures the Content Security Policy that will be set on all responses -
   ## the contents will be converted to JSON and passed into https://github.com/helmetjs/csp
-  # csp:
+  csp:
+    directives:
+      scriptSrc:
+      - "''self''"
+      - "''unsafe-inline''" # For VWO, hopefully we can remove this soon
+      - "data:" # Also for VWO
+      - browser-update.org
+      - dev.visualwebsiteoptimizer.com
+      - platform.twitter.com
+      - www.googletagmanager.com
+      - www.google-analytics.com
+      - rum-static.pingdom.net
+      - https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.4.1/rollbar.min.js
+      - https://tagmanager.google.com/debug
+      - assets.zendesk.com
+      - static.zdassets.com
+      - ekr.zdassets.com
+      objectSrc:
+      - "''none''"
+      sandbox: # We run the sandbox because we have to have unsafe-inline, when we remove unsafe inline we should remove this
+      - allow-scripts
+      - allow-same-origin
+      - allow-popups
+      - allow-forms
+      - allow-popups-to-escape-sandbox
+      reportUri: https://sdga.report-uri.com/r/d/csp/enforce
 
   ## Configures helmet.js - config will be converted to JSON and passed to 
   ## https://github.com/helmetjs/helmet
-  # helmet:
+  helmet:
+    hsts:
+      maxAge: 31536000
+      includeSubdomains: true
+      preload: true
 
   ## Configures cross-origin resource sharing - will be converted to JSON and passed
   ## to https://www.npmjs.com/package/cors#configuring-cors
@@ -338,72 +599,141 @@ gateway:
 
   ## Enables a simple form at /auth that allows you to test login and logout functionality
   ## without needing a web pod
-  # enableAuthEndpoint: false
+  enableAuthEndpoint: true
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 50Mi
+    limits:
+      cpu: 200m
 
 ## Configures the service that puts datasets and organisations into elasticsearch
-# indexer:
-  # elasticsearch:
+indexer:
+  elasticsearch:
     ## How many shards and replicas to use when creating a new index. Generally, more
     ## shards mean that the index will be split among more data nodes, and more replicas
     ## allows elasticsearch to copy those shards among different nodes.
     ## In general you want a number of shards equal to the lowest number of data nodes
     ## possible, and a number of replicas equal to the highest number.
-    # shards: 1
-    # replicas: 0
+    shards: 2
+    replicas: 4
+  resources:
+    requests:
+      cpu: 200m
+      memory: 500Mi
+    limits:
+      cpu: 500m
 
 ## Configures the TerriaJS server responsible for serving preview maps.
-# preview-map:
+preview-map:
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 200m
 
 ## Configures the registry, which holds information about datasets, distributions,
 ## organisations etc and distributes it.
-# registry-api:
+registry-api:
   ## Log level to use
-  # logLevel: INFO
+  logLevel: INFO
 
   ## Configures the liveness probe that checks if the registry is still alive. This
   ## is configurable seperately because currently the registry api has a tendency to
   ## slow down over time, and needs to be restarted when this occurs.
-  # livenessProbe:
-    # timeoutSeconds: 10
+  livenessProbe:
+    timeoutSeconds: 3
+
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1000Mi
+    limits:
+      cpu: 2000m
 
 ## Configures the registry database, if a separate one is being used.
 # registry-db:
     
 ## Configures the API that connects to ElasticSearch to perform searches.
-# search-api:
+search-api:
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 500Mi
+    limits:
+      cpu: 1000m
 
 ## Configures the database used to store session information by passport js, if
 ## one is being used.
 # session-db:
 
 ## The server used for serving the web application to users.
-# web-server:
+web-server:
   ## Autoscaler settings - the min and max number of pods to use
-  # autoscaler:
-  #   minReplicas: 2
-  #   maxReplicas: 4
+  autoscaler:
+    minReplicas: 2
+    maxReplicas: 4
   
   ## Whether to disable the ability to log in in the UI - set this to true if
   ## you don't want to use any account features.
-  # disableAuthenticationFeatures: true
+  disableAuthenticationFeatures: true
 
   ## If you're replacing an existing system, you can set its url here to display a
   ## banner allowing people to go back if they don't like the new system.
-  # fallbackUrl: "https://data.gov.au"
+  fallbackUrl: "https://data.gov.au"
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 50Mi
+    limits:
+      cpu: 200m
 
 ## Settings for the broken link sleuther, which crawls URLs of distributions in order
 ## to determine whether they're still available.
-# sleuther-broken-link:
+sleuther-broken-link:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 500m
+      memory: 500Mi
   
 ## Settings for the format sleuther, which tries to determine the true format of a 
 ## distribution based on a number of criteria.
-# sleuther-format:
+sleuther-format:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 500m
+      memory: 500Mi
 
 ## Settings for the linked data rating sleuther, which determines a rating for a dataset
 ## based off the availability, license and format of a dataset
-# sleuther-linked-data-rating:
+sleuther-linked-data-rating:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 500m
+      memory: 500Mi
 
 ## Settings for teh visualization sleuther, which looks at tabular data in order to 
 ## determine which columns can be charted.
-# sleuther-visualization:
+sleuther-visualization:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 200Mi
+    limits:
+      cpu: 500m
+      memory: 500Mi
 
