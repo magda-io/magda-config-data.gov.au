@@ -1,54 +1,28 @@
-# Magda Boilerplate
+# Data.gov.au Magda Config
 
-This is a simple boilerplate that allows you to quickly set up a Magda instance.
+This is the custom magda config used for running search.data.gov.au. It shows an example of how you can run a high-availability configuration of Magda under GKE.
 
-# Getting Started
-Before you start you need a kubernetes cluster, kubectl and helm.
+Keep in mind that Data.gov.au uses a number of services that exist outside Kubernetes and are a bit fiddly to set up - in particularly it uses Let's Encrypt for HTTPS through its domain hosted on Route53 in AWS, a GCE Ingress (which should be automatically provisioned by Google Cloud but often needs some nudging via the console) and Google Cloud SQL postgres (which requires the right secrets to be set up for both a service account and a database user).
 
-1. Fork this repository - this means you can make your own customisations, but still pull in updates.
+# Migrating from the previous, bundled-into-the-same repository version of Magda data.gov.au
 
-2. `git clone` it to your local machine open a terminal in the directory
+1. Delete stuff that wasn't managed by helm that we'll need to replace with stuff that now is.
 
-3. Look at config.yml and make sure to customise the uncommented lines. Everything else can be left as default for now.
-
-4. Run the create secrets script in a command line and follow the prompts
-```
-    ./create-secrets/index-linux
-    # OR
-    ./create-secrets/index-macos
-    # OR
-    create-secrets\index.win.exe
-```
-Output should look something like so:
-```
-magda-create-secrets tool version: 0.0.47-0
-? Are you creating k8s secrets for google cloud or local testing cluster? Local Testing Kubernetes Cluster
-? Which local k8s cluster environment you are going to connect to? docker
-? Do you need to access SMTP service for sending data request email? YES
-? Please provide SMTP service username: abc
-? Please provide SMTP service password: def
-? Do you want to create google-client-secret for oAuth SSO? NO
-? Do you want to create facebook-client-secret for oAuth SSO? NO
-? Do you want to manually input the password used for databases? Generated password: up3Saeshusoequoo
-? Specify a namespace or leave blank and override by env variable later? YES (Specify a namespace)
-? What's the namespace you want to create secrets into (input `default` if you want to use the `default` namespace)? default
-? Do you want to allow environment variables (see --help for full list) to override current settings at runtime? YES (Any environment variable can ove
-ride my settings)
-? Do you want to connect to kubernetes cluster to create secrets now? YES (Create Secrets in Cluster now)
-Successfully created secret `smtp-secret` in namespace `default`.
-Successfully created secret `db-passwords` in namespace `default`.
-Successfully created secret `auth-secrets` in namespace `default`.
-All required secrets have been successfully created!
+```bash
+kubectl delete cronjobs --all
+kubectl delete configmap connector-config
 ```
 
-5. Add the magda chart repo to helm
-```
+2. Add the magda chart repo to helm
+```bash
 helm repo add magda-io https://charts.magda.io
+
+# "magda-io" has been added to your repositories
 ```
 
-6. Install magda
-```
-helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yml
+3. Install magda. The `--devel` flag allows us to install the latest RC version
+```bash
+helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yaml --devel
 ```
 
 This will take a while for it to get everything set up. If you want to watch progress, run `kubectl get pods -w` in another terminal.

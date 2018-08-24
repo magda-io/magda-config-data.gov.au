@@ -195,13 +195,6 @@ connectors:
       sourceUrl: https://data-launceston.opendata.arcgis.com/data.json
       schedule: 0 3 */3 * *
     - image:
-        name: magda-dap-connector
-      id: dap
-      name: CSIRO
-      sourceUrl: https://data.csiro.au/dap/ws/v2/
-      pageSize: 100
-      schedule: 30 12 */3 * *
-    - image:
         name: magda-csw-connector
       id: marlin
       name: CSIRO Marlin
@@ -431,6 +424,9 @@ authorization-api:
     requests:
       cpu: 100m
       memory: 100Mi
+    limits:
+      cpu: 200m
+
 
 ## Settings for the authorization-db, which serves the authorization-api
 # authorization-db:
