@@ -534,7 +534,7 @@ gateway:
 
   ## If replacing a CKAN installation with Magda, this will redirect CKAN paths without
   ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
-  ckanRedirectionDomain: "ckan.data.gov.au"
+  ckanRedirectionDomain: "data.gov.au"
 
   ## Configure the autoscaler
   autoscaler:
@@ -595,7 +595,7 @@ gateway:
 
   ## Enables a simple form at /auth that allows you to test login and logout functionality
   ## without needing a web pod
-  enableAuthEndpoint: true
+  enableAuthEndpoint: false
 
   resources:
     requests:
