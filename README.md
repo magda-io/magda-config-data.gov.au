@@ -27,12 +27,6 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 
 This will take a while for it to get everything set up. If you want to watch progress, run `kubectl get pods -w` in another terminal.
 
-7. Once helm is finished, run `kubectl get services -w` and wait for `gateway` to receive an external IP. It'll look something like this:
+4. No need to delete es-data pods manually, helm now does that :tada:.
 
-```
-gateway                           LoadBalancer   10.102.57.74     123.456.789.123     80:31519/TCP        1m
-```
-
-At this point you should be able to go to http://<external ip> in your browser and see the Magda UI. Note that the search won't work until it's finished indexing regions - to see the progress of this, run `kubectl logs -f -lservice=indexer`. Unless you've got a lot of processing power this will take quite a while - sorry! We're working on making it better.
-
-8. 
+5. No need to do anything with the cronjobs or cron config, it's all in helm now! :tada:
