@@ -15,7 +15,7 @@ global:
   ## The external URL of the installation, e.g. "https://search.data.gov.au".
   ## This is used in a number of places, including linking back to the site
   ## from emails, creating a absolute sitemap URL for robots.txt, etc.
-  externalUrl: https://search.data.gov.au
+  externalUrl: https://staging.search.data.gov.au
 
   ## How to handle rolling updates during a deployment. If set to 0, kubernetes
   ## will happily take down pods while it replaces them (useful for dev setups).
@@ -107,7 +107,7 @@ connectors:
   includeInitialJobs: false
 
   ## Whether to run recurring jobs on the schedule specified per connector.
-  includeCronJobs: true
+  includeCronJobs: false
 
   ## They can also have their resource requirements customised individually as per
   ## https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/ like so:
@@ -337,9 +337,9 @@ connectors:
 ## Otherwise using the built-in Kubernetes LoadBalancer works ok.
 ingress:
   ## The hostname of the site
-  hostname: search.data.gov.au
+  hostname: staging.search.data.gov.au
   ## The name of the external ip to use - used when using the GCE ingress type
-  ipName: search-data-gov-au-ingress
+  ipName: staging-search-data-gov-au-ingress
   ## The class of the ingress - if running on GKE, gce will automatically work, otherwise you
   ## can use "nginx" which requires extra setup
   ingressClass: gce
@@ -351,8 +351,7 @@ ingress:
   ## Domains to attempt to obtain an SSL certificate for from let's encrypt, if using certmanager
   ## (requires extra setup)
   domains:
-    - search.data.gov.au
-    - letest.search.data.gov.au
+    - staging.search.data.gov.au
 
 ## Below are individual settings for services. All services can be customised as follows:
 # servicename:
@@ -436,7 +435,7 @@ cloud-sql-proxy:
   replicas: 2
 
   ## The cloud sql instance to connect to
-  instanceConnectionName: terriajs:australia-southeast1:magda-prod
+  instanceConnectionName: terriajs:australia-southeast1:magda-staging
 
 ## A pod that combines all the databases if global.useCombinedDb is set to true
 # combined-db:
@@ -453,7 +452,7 @@ correspondence-api:
 
   ## The default recipient to email when there's no other choice - e.g. when asking a
   ## question about a dataset for which there's no organisational email
-  defaultRecipient: "data@digital.gov.au"
+  defaultRecipient: "magda-staging-test@mailinator.com"
 
   ## The hostname of the SMTP server to use - the password should be in a secret
   smtpHostname: "smtp.mailgun.org"
@@ -534,7 +533,7 @@ gateway:
 
   ## If replacing a CKAN installation with Magda, this will redirect CKAN paths without
   ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
-  ckanRedirectionDomain: "ckan.data.gov.au"
+  ckanRedirectionDomain: "data.gov.au"
 
   ## Configure the autoscaler
   autoscaler:
@@ -595,7 +594,7 @@ gateway:
 
   ## Enables a simple form at /auth that allows you to test login and logout functionality
   ## without needing a web pod
-  enableAuthEndpoint: true
+  enableAuthEndpoint: false
 
   resources:
     requests:
