@@ -13,6 +13,11 @@ kubectl delete cronjobs --all
 kubectl delete configmap connector-config
 ```
 
+2. Add secrets for config-db
+```bash
+kubectl edit secret db-secrets
+```
+
 2. Add the magda chart repo to helm
 ```bash
 helm repo add magda-io https://charts.magda.io
