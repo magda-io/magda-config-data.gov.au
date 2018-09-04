@@ -15,7 +15,7 @@ kubectl delete configmap connector-config
 
 2. Add secrets for config-db
 ```bash
-kubectl edit secret db-secrets
+kubectl edit secret db-passwords
 ```
 
 2. Add the magda chart repo to helm
