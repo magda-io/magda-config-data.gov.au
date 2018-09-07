@@ -442,7 +442,15 @@ cloud-sql-proxy:
 # combined-db:
 
 ## A pod that controls the content in magda's UI
-# content-api:
+content-api:
+  replicas: 2
+  
+  resources:
+    requests:
+      cpu: 100m
+      memory: 50Mi
+    limits:
+      cpu: 200m
 
 ## The database behind content-api
 # content-db:
