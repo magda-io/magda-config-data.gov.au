@@ -641,14 +641,36 @@ registry-api:
   ## is configurable seperately because currently the registry api has a tendency to
   ## slow down over time, and needs to be restarted when this occurs.
   livenessProbe:
-    timeoutSeconds: 3
+    timeoutSeconds: 5
 
-  resources:
-    requests:
-      cpu: 500m
-      memory: 1000Mi
-    limits:
-      cpu: 2000m
+  ## The registry api is able to be split into two kinds of deployments: full, which does everything
+  ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
+  ## is stateless and can be horizontally scaled
+  deployments:
+    full:
+      # Resources for the full deployment, as per other resource declarations
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1000Mi
+        limits:
+          cpu: 2000m
+
+    readOnly:
+      ## Whether to enable the read-only deployment - if not all traffic will go to the full deployment,
+      ## otherwise traffic through /api/v0/registry will come here and only traffic to /api/v0/registry-auth
+      ## will go to the full deployment
+      enable: true
+      
+      ## Number of replicas
+      replicas: 2
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 300Mi
+        limits:
+          cpu: 1000m
 
 ## Configures the registry database, if a separate one is being used.
 # registry-db:
