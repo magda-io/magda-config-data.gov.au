@@ -127,27 +127,27 @@ connectors:
     # imagePullSecret: ""
 
   config:
-  #     ## The service's image as per the global options under "global.image", but with a "name "
-  #     ## currently available are magda-ckan-connector, magda-project-open-data-connector and magda-csw-connector
-  #   - image:
-  #       name: "magda-ckan-connector"
-  #       # tag: vx.x.x
-  #       # pullPolicy: IfNotPresent
-  #       # imagePullSecret: ""
+      ## The service's image as per the global options under "global.image", but with a "name "
+      ## currently available are magda-ckan-connector, magda-project-open-data-connector and magda-csw-connector
+    - image:
+        name: "magda-ckan-connector"
+        # tag: vx.x.x
+        # pullPolicy: IfNotPresent
+        # imagePullSecret: ""
 
-  #     ## Unique id to identify this connector and records that are harvested from it
-  #     id: dga
-  #     ## Friendly readable name
-  #     name: "data.gov.au"
-  #     ## The base URL of the place to source data from
-  #     sourceUrl: "https://data.gov.au/"
-  #     ## When crawling through from beginning to end, how big should the individual requests be in records?
-  #     pageSize: 1000
-  #     ## Crontab schedule for how often this should happen.
-  #     schedule: "0 * * * *"
-  #     ## CKAN-specific config: what harvest sources to ignore. * will ignore everything that's been harvested
-  #     ## from another portal
-  #     ignoreHarvestSources: ["*"]
+      ## Unique id to identify this connector and records that are harvested from it
+      id: dga
+      ## Friendly readable name
+      name: "data.gov.au"
+      ## The base URL of the place to source data from
+      sourceUrl: "https://data.gov.au/"
+      ## When crawling through from beginning to end, how big should the individual requests be in records?
+      pageSize: 1000
+      ## Crontab schedule for how often this should happen.
+      schedule: "0 * * * *"
+      ## CKAN-specific config: what harvest sources to ignore. * will ignore everything that's been harvested
+      ## from another portal
+      ignoreHarvestSources: ["*"]
     - image:
         name: magda-project-open-data-connector
       id: act
@@ -421,7 +421,7 @@ authorization-api:
   replicas: 2
   resources:
     requests:
-      cpu: 100m
+      cpu: 50m
       memory: 100Mi
     limits:
       cpu: 200m
@@ -441,7 +441,15 @@ cloud-sql-proxy:
 # combined-db:
 
 ## A pod that controls the content in magda's UI
-# content-api:
+content-api:
+  replicas: 2
+  
+  resources:
+    requests:
+      cpu: 50m
+      memory: 50Mi
+    limits:
+      cpu: 200m
 
 ## The database behind content-api
 # content-db:
@@ -463,7 +471,7 @@ correspondence-api:
 
   resources:
     requests:
-      cpu: 100m
+      cpu: 50m
       memory: 100Mi
     limits:
       cpu: 200m
@@ -491,7 +499,7 @@ elasticsearch:
     storageClass: "fast-ssd"
     resources:
       requests:
-        cpu: 800m
+        cpu: 500m
         memory: 5000Mi
       limits:
         cpu: 1500m
@@ -504,7 +512,7 @@ elasticsearch:
     # pluginsInstall: "repository-gcs" disabled until es backups are readded
     resources:
       requests:
-        cpu: 200m
+        cpu: 100m
         memory: 1500Mi
       limits:
         cpu: 400m
@@ -515,7 +523,7 @@ elasticsearch:
     # pluginsInstall: "repository-gcs" disabled until es backups are readded
     resources:
       requests:
-        cpu: 200m
+        cpu: 50m
         memory: 1500Mi
       limits:
         cpu: 400m
@@ -625,7 +633,7 @@ preview-map:
   replicas: 2
   resources:
     requests:
-      cpu: 100m
+      cpu: 50m
       memory: 100Mi
     limits:
       cpu: 200m
@@ -666,8 +674,8 @@ registry-api:
 
       resources:
         requests:
-          cpu: 100m
-          memory: 300Mi
+          cpu: 50m
+          memory: 250Mi
         limits:
           cpu: 1000m
 
@@ -679,7 +687,7 @@ search-api:
   replicas: 2
   resources:
     requests:
-      cpu: 100m
+      cpu: 50m
       memory: 500Mi
     limits:
       cpu: 1000m
@@ -748,7 +756,7 @@ minion-linked-data-rating:
 minion-visualization:
   resources:
     requests:
-      cpu: 500m
+      cpu: 100m
       memory: 200Mi
     limits:
       cpu: 1000m
