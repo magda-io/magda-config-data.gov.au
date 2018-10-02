@@ -65,31 +65,30 @@ global:
 ## to send emails, turn the correspondence-api off
 tags:
   ## "all" is a shortcut which turns on all services except minions.
-  all: true
+  all: false
 
   ## General services. Note that if you are using combined-db, you need to set both
   ## combined-db and the databases that you are using (e.g. authorization-db) to true.
   ## You can find explanations of what each of these are below
 
-  # apidocs-server: true
-  # authorization-api: true
-  # authorization-db: true
-  # cloud-sql-proxy: true
-  # combined-db: true
-  # content-db: true
-  # content-api: true
-  # correspondence-api: true
-  # elasticsearch: true
-  # gateway: true
-  # indexer: true
-  # preview-map: true
-  # registry-api: true
-  # registry-db: true
-  # search-api: true
-  # session-db: true
-  # web-server: true
-  # connectors: true
-  admin-api: false
+  apidocs-server: true
+  authorization-api: true
+  authorization-db: true
+  cloud-sql-proxy: true
+  combined-db: true
+  content-db: true
+  content-api: true
+  correspondence-api: true
+  elasticsearch: true
+  gateway: true
+  indexer: true
+  preview-map: true
+  registry-api: true
+  registry-db: true
+  search-api: true
+  session-db: true
+  web-server: true
+  connectors: true
 
   ## Whether to use an ingress, which is necessary for HTTPS and using the Google CDN with
   ## Google Kubernetes Engine. By default this is off, and access is provided to the cluster
@@ -256,13 +255,13 @@ connectors:
       name: Moreton Bay Regional Council Data Portal
       sourceUrl: http://data.moretonbay.qld.gov.au/data.json
       schedule: 0 7 */3 * *
-    - image:
-        name: magda-csw-connector
-      id: metoc
-      name: 'Navy Meteorology and Oceanography (METOC) '
-      sourceUrl: http://www.metoc.gov.au/geonetwork/srv/en/csw
-      pageSize: 100
-      schedule: 0 8 */3 * *
+    # - image:
+    #     name: magda-csw-connector
+    #   id: metoc
+    #   name: 'Navy Meteorology and Oceanography (METOC) '
+    #   sourceUrl: http://www.metoc.gov.au/geonetwork/srv/en/csw
+    #   pageSize: 100
+    #   schedule: 0 8 */3 * *
     - image:
         name: magda-csw-connector
       id: neii
