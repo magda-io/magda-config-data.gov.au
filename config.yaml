@@ -466,7 +466,9 @@ correspondence-api:
 
   ## The default recipient to email when there's no other choice - e.g. when asking a
   ## question about a dataset for which there's no organisational email
-  defaultRecipient: "magda-staging-test@mailinator.com"
+  defaultRecipient: "magda-test@googlegroups.com"
+
+  alwaysSendToDefaultRecipient: true
 
   ## The hostname of the SMTP server to use - the password should be in a secret
   smtpHostname: "smtp.mailgun.org"
