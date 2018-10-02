@@ -4,6 +4,12 @@ This is the custom magda config used for running search.data.gov.au. It shows an
 
 Keep in mind that Data.gov.au uses a number of services that exist outside Kubernetes and are a bit fiddly to set up - in particularly it uses Let's Encrypt for HTTPS through its domain hosted on Route53 in AWS, a GCE Ingress (which should be automatically provisioned by Google Cloud but often needs some nudging via the console) and Google Cloud SQL postgres (which requires the right secrets to be set up for both a service account and a database user).
 
+# To upgrade
+```
+helm repo update
+helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yaml --devel
+```
+
 # Migrating from the previous, bundled-into-the-same repository version of Magda data.gov.au
 
 1. Delete stuff that wasn't managed by helm that we'll need to replace with stuff that now is.
