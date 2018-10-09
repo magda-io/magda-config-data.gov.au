@@ -10,7 +10,12 @@ helm repo update
 helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yaml --devel
 ```
 
-# Migrating from the previous, bundled-into-the-same repository version of Magda data.gov.au
+# Upgrade Guide:
+
+## 0.0.49
+Because the CSS now comes from the `content-api`, we need to insert the correct SQL before upgrading or the page will be unstyled until the upgrade is finished. You can find a script to insert it in `sql-migrations/add-stylesheet-to-content-api.sql`. Run this against the content-db.
+
+## Migrating from the previous, bundled-into-the-same repository version of Magda data.gov.au
 
 1. Delete stuff that wasn't managed by helm that we'll need to replace with stuff that now is.
 
