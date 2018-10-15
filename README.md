@@ -12,6 +12,10 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 
 # Upgrade Guide:
 
+## 0.0.50
+Before helm upgrade:
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-email-templates.sql in order to create the email templates
+
 ## 0.0.49
 Because the CSS now comes from the `content-api`, we need to insert the correct SQL before upgrading or the page will be unstyled until the upgrade is finished. You can find a script to insert it in `sql-migrations/add-stylesheet-to-content-api.sql`. Run this against the content-db.
 
