@@ -1,0 +1,2 @@
+INSERT INTO public.content VALUES ('lang/en/global/appName', 'text/plain', 'data.gov.au - beta') ON CONFLICT DO NOTHING;
+INSERT INTO public.content VALUES ('lang/en/datasetSuggestForm/suggestSuccessMessage', 'text/plain', 'Someone from the Australian Digital Transformation Agency or the organisation that handles the relevant data will get in touch soon. Please note that the time taken to action your request may vary depending on the nature of the request') ON CONFLICT DO NOTHING;
