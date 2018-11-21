@@ -14,11 +14,13 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 
 ## 0.0.50
 Before helm upgrade:
+In the content db:
 - Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-email-templates.sql in order to create the email templates
 - Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-navigation-items.sql in order to create navigation menu items
 - Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-static-pages.sql to add static pages
 - Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-home-content.sql to add home content items
-- Run `sql-migrations/add-third-party-js.sql` in `content-db` to add the old third party js code.
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-third-party-js.sql to add the old third party js code.
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-initial-translations.sql to make sure the content of the suggest dataset email doesn't change and the app name stays the same
 - Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-footer-config.sql to change up footer items
 
 ## 0.0.49
