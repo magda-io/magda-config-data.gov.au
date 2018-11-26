@@ -1,14 +1,8 @@
-
-UPDATE public.content
-SET content = '{"order":10,"label":"Data.gov.au"}'
-WHERE id = 'footer/navigation/small/category/magda2';
-
+INSERT INTO public.content VALUES ('footer/navigation/small/category/magda2', 'application/json', '{"order":10,"label":"Data.gov.au"}');
 INSERT INTO public.content VALUES ('footer/navigation/small/category-links/magda2/signin', 'application/json', '{"order":30,"label":"Sign in","href":"https://data.gov.au/user/login"}');
 INSERT INTO public.content VALUES ('footer/navigation/small/category-links/magda2/feedback', 'application/json', '{"order":40,"label":"Give feedback","href":"feedback"}');
 
-UPDATE public.content
-SET content = '{"order":10,"label":"Data.gov.au"}'
-WHERE id = 'footer/navigation/medium/category/magda';
+INSERT INTO public.content VALUES ('footer/navigation/medium/category/magda', 'application/json', '{"order":10,"label":"Data.gov.au"}');
 INSERT INTO public.content VALUES ('footer/navigation/medium/category-links/magda/feedback', 'application/json', '{"order":40,"label":"Give feedback","href":"feedback"}');
 
 INSERT INTO public.content VALUES ('footer/navigation/medium/category/publishers', 'application/json', '{"order":15,"label":"Publishers"}');
