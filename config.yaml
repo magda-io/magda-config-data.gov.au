@@ -606,8 +606,9 @@ gateway:
 
   ## Configures cross-origin resource sharing - will be converted to JSON and passed
   ## to https://www.npmjs.com/package/cors#configuring-cors
-  # cors:
-
+  cors:
+    origin: /data\.gov.au$/
+    
   ## Enables a simple form at /auth that allows you to test login and logout functionality
   ## without needing a web pod
   enableAuthEndpoint: false
@@ -718,6 +719,10 @@ web-server:
   ## If you're replacing an existing system, you can set its url here to display a
   ## banner allowing people to go back if they don't like the new system.
   fallbackUrl: "https://data.gov.au"
+
+  gapiIds:
+    - "UA-92539508-1"
+    - "UA-38578922-1"
 
   resources:
     requests:

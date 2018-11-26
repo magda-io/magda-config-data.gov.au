@@ -7,10 +7,26 @@ Keep in mind that Data.gov.au uses a number of services that exist outside Kuber
 # To upgrade
 ```
 helm repo update
-helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yaml --devel
+helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yaml --version=<INSERT VERSION HERE (e.g. "0.0.49-RC2")>
 ```
 
-# Migrating from the previous, bundled-into-the-same repository version of Magda data.gov.au
+# Upgrade Guide:
+
+## 0.0.50
+Before helm upgrade:
+In the content db:
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-email-templates.sql in order to create the email templates
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-navigation-items.sql in order to create navigation menu items
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-static-pages.sql to add static pages
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-home-content.sql to add home content items
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-third-party-js.sql to add the old third party js code.
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-initial-translations.sql to make sure the content of the suggest dataset email doesn't change and the app name stays the same
+- Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-footer-config.sql to change up footer items
+
+## 0.0.49
+Because the CSS now comes from the `content-api`, we need to insert the correct SQL before upgrading or the page will be unstyled until the upgrade is finished. You can find a script to insert it in `sql-migrations/add-stylesheet-to-content-api.sql`. Run this against the content-db.
+
+## Migrating from the previous, bundled-into-the-same repository version of Magda data.gov.au
 
 1. Delete stuff that wasn't managed by helm that we'll need to replace with stuff that now is.
 
