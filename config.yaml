@@ -612,6 +612,9 @@ gateway:
   ## without needing a web pod
   enableAuthEndpoint: false
 
+  ## Redirect HTTP urls to HTTPs urls
+  enableHttpsRedirection: true
+
   resources:
     requests:
       cpu: 100m
