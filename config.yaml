@@ -740,6 +740,7 @@ minion-broken-link:
     limits:
       cpu: 500m
       memory: 1000Mi
+  domainWaitTimeConfig: '{"data.csiro.au":60,"data.gov.au":60,"data.act.gov.au":30}'
   
 ## Settings for the format minion, which tries to determine the true format of a 
 ## distribution based on a number of criteria.
