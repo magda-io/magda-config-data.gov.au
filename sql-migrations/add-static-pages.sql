@@ -12,7 +12,7 @@ Find out more [about open data](https://blog.data.gov.au/about-open-data).
 
 In addition to government data, you can also find publicly-funded research data and datasets from private institutions that are in the public interest.
 
-The site has over 30,000 publically available datasets and continues to grow. The federal government’s <a href="https://www.pmc.gov.au/sites/default/files/publications/aust_govt_public_data_policy_statement_1.pdf" target="_blank">public data policy statement<span class="visuallyhidden"> Opens in new window</span></a> requires all government agencies to make non-sensitive data open by default.
+The site has over 30,000 publically available datasets and continues to grow. The federal government’s <a href=\"https://www.pmc.gov.au/sites/default/files/publications/aust_govt_public_data_policy_statement_1.pdf\" target=\"_blank\">public data policy statement<span class=\"visuallyhidden\"> Opens in new window</span></a> requires all government agencies to make non-sensitive data open by default.
 
 In addition to free, open datasets, data.gov.au now includes information about unpublished data and data available for purchase.
 
@@ -20,7 +20,7 @@ In addition to free, open datasets, data.gov.au now includes information about u
 
 Many of the data sets can be visualised using the in-built mapping tools.
 
-Datasets that contain a geospatial field (such as latitude and longitude)can be mapped and viewed in <a href="http://nationalmap.gov.au/" target="_blank">NationalMap<span class="visuallyhidden"> Opens in new window</span></a>.
+Datasets that contain a geospatial field (such as latitude and longitude)can be mapped and viewed in <a href=\"http://nationalmap.gov.au/\" target=\"_blank\">NationalMap<span class=\"visuallyhidden\"> Opens in new window</span></a>.
 
 ### Contact us
 
@@ -44,17 +44,17 @@ Before you consider registering an account for a government (federal, state, loc
 
 ### Development
 
-Data.gov.au was transferred from the Department of Premier and Cabinet to the Digital Transformation Agency (DTA). The redeveloped platform MAGDA was developed in  partnership with CSIRO <a href="http://data61.csiro.au" target="_blank">Data61<span class="visuallyhidden"> Opens in new window</span></a>.
+Data.gov.au was transferred from the Department of Premier and Cabinet to the Digital Transformation Agency (DTA). The redeveloped platform MAGDA was developed in  partnership with CSIRO <a href=\"http://data61.csiro.au\" target=\"_blank\">Data61<span class=\"visuallyhidden\"> Opens in new window</span></a>.
 
 MAGDA (Making Australian Government Data Available) is a fully open source project.
 
-Read more about the project at <a href="https://magda.io/" target="_blank">magda.io<span class="visuallyhidden"> Opens in new window</span></a>
+Read more about the project at <a href=\"https://magda.io/\" target=\"_blank\">magda.io<span class=\"visuallyhidden\"> Opens in new window</span></a>
 
 ## Terms of Use
 
 ### Copyright
 
-With the exception of the Commonwealth Coat of Arms and where otherwise noted, material presented on data.gov.au is provided under a <a href="http://creativecommons.org/licenses/by/3.0/au/" target="_blank">Creative Commons Attribution 3.0 Australia licence<span class="visuallyhidden"> Opens in new window</span></a>.
+With the exception of the Commonwealth Coat of Arms and where otherwise noted, material presented on data.gov.au is provided under a <a href=\"http://creativecommons.org/licenses/by/3.0/au/\" target=\"_blank\">Creative Commons Attribution 3.0 Australia licence<span class=\"visuallyhidden\"> Opens in new window</span></a>.
 
 ### How to attribute datasets
 
@@ -64,7 +64,7 @@ This website requires that you use the following form of attribution:
 
 Attribution to: Organisation name, jurisdiction, title of dataset, date the content was sourced, dataset URL
 
-Example: The Department of the Primary Industries and Regions, South Australia, Field Crop Estimates, Sourced on 22 July 2013, <a href="http://www.data.sa.gov.au/dataset/field-crop-production-estimates" target="_blank">http://www.data.sa.gov.au/dataset/field-crop-production-estimates<span class="visuallyhidden"> Opens in new window</span></a>
+Example: The Department of the Primary Industries and Regions, South Australia, Field Crop Estimates, Sourced on 22 July 2013, <a href=\"http://www.data.sa.gov.au/dataset/field-crop-production-estimates\" target=\"_blank\">http://www.data.sa.gov.au/dataset/field-crop-production-estimates<span class=\"visuallyhidden\"> Opens in new window</span></a>
 
 ### Lawful purposes
 
@@ -175,7 +175,7 @@ title: Privacy Policy
 
 data.gov.au is an online service managed by the Digital Transformation Agency. We respect and protect the privacy of our users. This privacy policy tells you how we collect and use information.
 
-The term "Personal Information" in this privacy policy means any information from which your identity is apparent or can be reasonably ascertained. We do not collect Personal Information about you when you visit this online service.
+The term \"Personal Information\" in this privacy policy means any information from which your identity is apparent or can be reasonably ascertained. We do not collect Personal Information about you when you visit this online service.
 
 You can use this service without telling us who you are or revealing other Personal Information. If you send us a contact or feedback form you do not need to identify yourself or use your real name.
 
@@ -215,7 +215,7 @@ We train our employees about the importance of confidentiality and maintaining t
 
 ### Website analytics
 
-To improve your experience on our site, we use "cookies". Cookies are an industry standard and most major websites use them. A cookie is a small text file that our site may place on your computer as a tool to remember your preferences. You may refuse the use of cookies by selecting the appropriate settings on your browser, however please note that if you do this you may not be able to use the full functionality of this website.
+To improve your experience on our site, we use \"cookies\". Cookies are an industry standard and most major websites use them. A cookie is a small text file that our site may place on your computer as a tool to remember your preferences. You may refuse the use of cookies by selecting the appropriate settings on your browser, however please note that if you do this you may not be able to use the full functionality of this website.
 
 Our website may contain links to other websites. Please be aware that we are not responsible for the privacy practices of such other sites. When you go to other websites from here, we advise you to be aware and read their privacy policy.
 

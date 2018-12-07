@@ -23,6 +23,19 @@ In the content db:
 - Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-initial-translations.sql to make sure the content of the suggest dataset email doesn't change and the app name stays the same
 - Run https://github.com/magda-io/magda-config-data.gov.au/blob/master/sql-migrations/add-footer-config.sql to change up footer items
 
+Run `kubectl apply -f role-binding.yaml` to make the admin api work.
+
+This version includes a datasets index upgrade, so add...
+
+```yaml
+  image:
+    tag: 0.0.49-RC3
+```
+
+... to the config for `search-api` before running helm upgrade. Look at the indexer logs, when it's finished indexing then remove those lines and run helm upgrade again.
+
+This also makes the change from the web client getting content from the CMS, so you'll need to 
+
 ## 0.0.49
 Because the CSS now comes from the `content-api`, we need to insert the correct SQL before upgrading or the page will be unstyled until the upgrade is finished. You can find a script to insert it in `sql-migrations/add-stylesheet-to-content-api.sql`. Run this against the content-db.
 
