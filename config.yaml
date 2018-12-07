@@ -71,6 +71,7 @@ tags:
   ## combined-db and the databases that you are using (e.g. authorization-db) to true.
   ## You can find explanations of what each of these are below
 
+  admin-api: true
   apidocs-server: true
   authorization-api: true
   authorization-db: true
@@ -550,6 +551,8 @@ gateway:
   ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
   ckanRedirectionDomain: "data.gov.au"
 
+  enableHttpsRedirection: true
+
   ## Configure the autoscaler
   autoscaler:
     ## whether to enable autoscaling
@@ -610,7 +613,7 @@ gateway:
     
   ## Enables a simple form at /auth that allows you to test login and logout functionality
   ## without needing a web pod
-  enableAuthEndpoint: false
+  enableAuthEndpoint: true
 
   resources:
     requests:
