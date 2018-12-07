@@ -616,6 +616,9 @@ gateway:
   ## without needing a web pod
   enableAuthEndpoint: true
 
+  ## Redirect HTTP urls to HTTPs urls
+  enableHttpsRedirection: true
+
   resources:
     requests:
       cpu: 100m
@@ -744,6 +747,10 @@ minion-broken-link:
     limits:
       cpu: 500m
       memory: 1000Mi
+  domainWaitTimeConfig:
+    data.csiro.au: 5
+    data.gov.au: 5
+    data.act.gov.au: 30
   
 ## Settings for the format minion, which tries to determine the true format of a 
 ## distribution based on a number of criteria.
