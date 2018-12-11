@@ -626,6 +626,9 @@ gateway:
     limits:
       cpu: 200m
 
+  ## Redirect HTTP urls to HTTPs urls
+  enableHttpsRedirection: false
+
 ## Configures the service that puts datasets and organisations into elasticsearch
 indexer:
   elasticsearch:
@@ -694,6 +697,20 @@ registry-api:
         limits:
           cpu: 1000m
 
+  ## The registry api is able to be split into two kinds of deployments: full, which does everything
+  ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
+  ## is stateless and can be horizontally scaled
+  # deployments:
+  #   full:
+
+    # readOnly:
+      ## Whether to enable the read-only deployment - if not all traffic will go to the full deployment,
+      ## otherwise traffic through /api/v0/registry will come here and only traffic to /api/v0/registry-auth
+      ## will go to the full deployment
+      # enable: false
+
+
+
 ## Configures the registry database, if a separate one is being used.
 # registry-db:
 
@@ -737,6 +754,13 @@ web-server:
     limits:
       cpu: 200m
 
+  # Google Analytics Ids to collect analytics data from the frontend
+  # gapiIds:
+    # - "ABC123"
+
+  ## The search score after which to show a "suggest a dataset" form
+  # datasetSearchSuggestionScoreThreshold: 65
+
 ## Settings for the broken link minion, which crawls URLs of distributions in order
 ## to determine whether they're still available.
 minion-broken-link:
@@ -774,7 +798,7 @@ minion-linked-data-rating:
       cpu: 500m
       memory: 500Mi
 
-## Settings for teh visualization minion, which looks at tabular data in order to
+## Settings for the visualization minion, which looks at tabular data in order to
 ## determine which columns can be charted.
 minion-visualization:
   resources:
@@ -784,3 +808,16 @@ minion-visualization:
     limits:
       cpu: 1000m
       memory: 500Mi
+
+# Settings for the admin API, which allows for changes to be made to the magda
+# installation at runtime... e.g. creating new connector jobs
+admin-api:
+  # We only need one of these seeing how it's only admin facing
+  replicas: 1
+  
+  resources:
+    requests:
+      cpu: 50m
+      memory: 50Mi
+    limits:
+      cpu: 200m

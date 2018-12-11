@@ -53,20 +53,20 @@ kubectl delete configmap connector-config
 kubectl edit secret db-passwords
 ```
 
-2. Add the magda chart repo to helm
+3 Add the magda chart repo to helm
 ```bash
 helm repo add magda-io https://charts.magda.io
 
 # "magda-io" has been added to your repositories
 ```
 
-3. Install magda. The `--devel` flag allows us to install the latest RC version
+4. Install magda. The `--devel` flag allows us to install the latest RC version
 ```bash
 helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yaml --devel
 ```
 
 This will take a while for it to get everything set up. If you want to watch progress, run `kubectl get pods -w` in another terminal.
 
-4. No need to delete es-data pods manually, helm now does that :tada:.
+5. No need to delete es-data pods manually, helm now does that :tada:.
 
-5. No need to do anything with the cronjobs or cron config, it's all in helm now! :tada:
+6. No need to do anything with the cronjobs or cron config, it's all in helm now! :tada:
