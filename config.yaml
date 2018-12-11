@@ -783,3 +783,16 @@ minion-visualization:
     limits:
       cpu: 1000m
       memory: 500Mi
+
+# Settings for the admin API, which allows for changes to be made to the magda
+# installation at runtime... e.g. creating new connector jobs
+admin-api:
+  # We only need one of these seeing how it's only admin facing
+  replicas: 1
+  
+  resources:
+    requests:
+      cpu: 50m
+      memory: 50Mi
+    limits:
+      cpu: 200m
