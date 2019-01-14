@@ -15,7 +15,7 @@ global:
   ## The external URL of the installation, e.g. "https://search.data.gov.au".
   ## This is used in a number of places, including linking back to the site
   ## from emails, creating a absolute sitemap URL for robots.txt, etc.
-  externalUrl: https://search.data.gov.au
+  externalUrl: https://data.gov.au
 
   ## How to handle rolling updates during a deployment. If set to 0, kubernetes
   ## will happily take down pods while it replaces them (useful for dev setups).
@@ -206,7 +206,7 @@ connectors:
         name: magda-ckan-connector
       id: dga
       name: data.gov.au
-      sourceUrl: https://data.gov.au/
+      sourceUrl: https://data.gov.au/data
       pageSize: 1000
       schedule: 0 * * * *
       ignoreHarvestSources:
@@ -550,7 +550,7 @@ gateway:
   ## If replacing a CKAN installation with Magda, this will redirect CKAN paths without
   ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
   ckanRedirectionDomain: "data.gov.au"
-
+  ckanRedirectionPath: "/data"
   enableHttpsRedirection: true
 
   ## Configure the autoscaler
@@ -747,7 +747,7 @@ web-server:
 
   ## If you're replacing an existing system, you can set its url here to display a
   ## banner allowing people to go back if they don't like the new system.
-  fallbackUrl: "https://data.gov.au"
+  fallbackUrl: "https://data.gov.au/data/"
 
   gapiIds:
     - "UA-92539508-1"
