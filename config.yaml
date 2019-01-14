@@ -747,7 +747,7 @@ web-server:
 
   ## If you're replacing an existing system, you can set its url here to display a
   ## banner allowing people to go back if they don't like the new system.
-  fallbackUrl: "https://data.gov.au"
+  fallbackUrl: "https://data.gov.au/data/"
 
   gapiIds:
     - "UA-92539508-1"
