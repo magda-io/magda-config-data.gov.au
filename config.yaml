@@ -141,7 +141,7 @@ connectors:
       ## Friendly readable name
       name: "data.gov.au"
       ## The base URL of the place to source data from
-      sourceUrl: "https://data.gov.au/"
+      sourceUrl: "https://data.gov.au/data/"
       ## When crawling through from beginning to end, how big should the individual requests be in records?
       pageSize: 1000
       ## Crontab schedule for how often this should happen.
