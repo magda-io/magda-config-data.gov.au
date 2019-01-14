@@ -330,7 +330,7 @@ connectors:
         name: magda-ckan-connector
       id: wa
       name: Western Australia Government
-      sourceUrl: http://catalogue.beta.data.wa.gov.au/
+      sourceUrl: https://catalogue.data.wa.gov.au/
       pageSize: 100
       schedule: 55 * * * *
     - image:
