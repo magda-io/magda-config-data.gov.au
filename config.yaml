@@ -537,7 +537,7 @@ elasticsearch:
         cpu: 50m
         memory: 1500Mi
       limits:
-        cpu: 100m
+        cpu: 250m
 
   ## Settings for the master nodes - these keep track of the data nodes as they go up
   ## and down and keep track of what the current state of the data should be.
@@ -548,7 +548,7 @@ elasticsearch:
         cpu: 25m
         memory: 1000Mi
       limits:
-        cpu: 100m
+        cpu: 250m
 
 ## The gateway accepts incoming connections and directs them to the appropriate api pod,
 ## or the web server pod
@@ -713,7 +713,7 @@ registry-api:
           cpu: 25m
           memory: 300Mi
         limits:
-          cpu: 50m
+          cpu: 250m
 
   ## The registry api is able to be split into two kinds of deployments: full, which does everything
   ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
