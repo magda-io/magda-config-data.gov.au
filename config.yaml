@@ -612,7 +612,7 @@ gateway:
   helmet:
     hsts:
       maxAge: 31536000
-      includeSubdomains: true
+      includeSubdomains: false
       preload: true
 
   ## Configures cross-origin resource sharing - will be converted to JSON and passed
