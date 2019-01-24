@@ -603,9 +603,7 @@ gateway:
       - sentry.system.data.gov.au
       objectSrc:
       - "''none''"
-      reportUri: 
-      - https://sdga.report-uri.com/r/d/csp/enforce
-      - https://sentry.system.data.gov.au/api/4/security/?sentry_key=b456c7ab8f784b569ce32faa04eb238e
+      reportUri: "https://sentry.system.data.gov.au/api/4/security/?sentry_key=b456c7ab8f784b569ce32faa04eb238e"
 
   ## Configures helmet.js - config will be converted to JSON and passed to
   ## https://github.com/helmetjs/helmet
