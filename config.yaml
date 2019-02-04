@@ -156,6 +156,12 @@ connectors:
       sourceUrl: http://www.data.act.gov.au/data.json
       schedule: 0 0 */3 * *
     - image:
+        name: magda-project-open-data-connector
+      id: actmapi
+      name: ACT Government ACTMAPi
+      sourceUrl: http://actmapi-actgov.opendata.arcgis.com/data.json
+      schedule: 45 0 */3 * *
+    - image:
         name: magda-csw-connector
       id: aims
       name: Australian Institute of Marine Science
