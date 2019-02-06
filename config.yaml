@@ -15,7 +15,7 @@ global:
   ## The external URL of the installation, e.g. "https://search.data.gov.au".
   ## This is used in a number of places, including linking back to the site
   ## from emails, creating a absolute sitemap URL for robots.txt, etc.
-  externalUrl: https://search.data.gov.au
+  externalUrl: https://data.gov.au
 
   ## How to handle rolling updates during a deployment. If set to 0, kubernetes
   ## will happily take down pods while it replaces them (useful for dev setups).
@@ -24,7 +24,7 @@ global:
   rollingUpdate:
     maxUnavailable: 1
 
-  #image:
+  image:
     ## What tag of the magda images to get. Look at
     ## for versions. https://github.com/magda-io/magda/releases/latest.
     ## By default this is the same version as the helm chart.
@@ -141,7 +141,7 @@ connectors:
       ## Friendly readable name
       name: "data.gov.au"
       ## The base URL of the place to source data from
-      sourceUrl: "https://data.gov.au/"
+      sourceUrl: "https://data.gov.au/data/"
       ## When crawling through from beginning to end, how big should the individual requests be in records?
       pageSize: 1000
       ## Crontab schedule for how often this should happen.
@@ -206,7 +206,7 @@ connectors:
         name: magda-ckan-connector
       id: dga
       name: data.gov.au
-      sourceUrl: https://data.gov.au/
+      sourceUrl: https://data.gov.au/data
       pageSize: 1000
       schedule: 0 * * * *
       ignoreHarvestSources:
@@ -254,7 +254,7 @@ connectors:
         name: magda-project-open-data-connector
       id: moretonbay
       name: Moreton Bay Regional Council Data Portal
-      sourceUrl: http://data.moretonbay.qld.gov.au/data.json
+      sourceUrl: http://datahub.moretonbay.qld.gov.au/data.json
       schedule: 0 7 */3 * *
     # - image:
     #     name: magda-csw-connector
@@ -330,7 +330,7 @@ connectors:
         name: magda-ckan-connector
       id: wa
       name: Western Australia Government
-      sourceUrl: http://catalogue.beta.data.wa.gov.au/
+      sourceUrl: https://catalogue.data.wa.gov.au/
       pageSize: 100
       schedule: 55 * * * *
     - image:
@@ -422,15 +422,22 @@ ingress:
 
 ## Settings for the apidocs server, which serves the documentation for the api from
 ## /api/v0/apidocs/index.html
-# apidoc-server:
+apidoc-server:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 10m
+      memory: 10Mi
+    limits:
+      cpu: 20m
 
 ## Settings for the authorization-api, which determines what each user's permissions are:
 authorization-api:
   replicas: 2
   resources:
     requests:
-      cpu: 50m
-      memory: 100Mi
+      cpu: 100m
+      memory: 75Mi
     limits:
       cpu: 200m
 
@@ -441,6 +448,13 @@ authorization-api:
 ## A pod for proxying to Google Cloud SQL, the GCE managed database service.
 cloud-sql-proxy:
   replicas: 2
+
+  resources:
+    requests:
+      cpu: 150m
+      memory: 20Mi
+    limits:
+      cpu: 300m
 
   ## The cloud sql instance to connect to
   instanceConnectionName: terriajs:australia-southeast1:magda-prod
@@ -454,10 +468,10 @@ content-api:
   
   resources:
     requests:
-      cpu: 50m
-      memory: 50Mi
+      cpu: 25m
+      memory: 75Mi
     limits:
-      cpu: 200m
+      cpu: 100m
 
 ## The database behind content-api
 # content-db:
@@ -479,10 +493,10 @@ correspondence-api:
 
   resources:
     requests:
-      cpu: 50m
-      memory: 100Mi
+      cpu: 10m
+      memory: 60Mi
     limits:
-      cpu: 200m
+      cpu: 50m
 
 ## The elasticsearch setup - this can consist of up to three different kinds of pods -
 ## data nodes, master nodes and client nodes.
@@ -520,10 +534,10 @@ elasticsearch:
     # pluginsInstall: "repository-gcs" disabled until es backups are readded
     resources:
       requests:
-        cpu: 100m
+        cpu: 50m
         memory: 1500Mi
       limits:
-        cpu: 400m
+        cpu: 250m
 
   ## Settings for the master nodes - these keep track of the data nodes as they go up
   ## and down and keep track of what the current state of the data should be.
@@ -531,10 +545,10 @@ elasticsearch:
     # pluginsInstall: "repository-gcs" disabled until es backups are readded
     resources:
       requests:
-        cpu: 50m
-        memory: 1500Mi
+        cpu: 25m
+        memory: 1000Mi
       limits:
-        cpu: 400m
+        cpu: 250m
 
 ## The gateway accepts incoming connections and directs them to the appropriate api pod,
 ## or the web server pod
@@ -550,7 +564,7 @@ gateway:
   ## If replacing a CKAN installation with Magda, this will redirect CKAN paths without
   ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
   ckanRedirectionDomain: "data.gov.au"
-  ckanRedirectionPath: ""
+  ckanRedirectionPath: "/data"
   enableCkanRedirection: true
   enableHttpsRedirection: true
 
@@ -561,7 +575,7 @@ gateway:
     ## The minimum number of replicas to have
     minReplicas: 2
     ## The maximum number of replicas to have
-    maxReplicas: 4
+    maxReplicas: 5
 
   ## Client ids to use for OAuth authentication
   # auth:
@@ -576,35 +590,28 @@ gateway:
     directives:
       scriptSrc:
       - "''self''"
-      - "''unsafe-inline''" # For VWO, hopefully we can remove this soon
-      - "data:" # Also for VWO
+      - "''unsafe-inline''" # still being used by rollbar
       - browser-update.org
-      - dev.visualwebsiteoptimizer.com
       - platform.twitter.com
       - www.googletagmanager.com
       - www.google-analytics.com
       - rum-static.pingdom.net
-      - https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.4.1/rollbar.min.js
       - https://tagmanager.google.com/debug
       - assets.zendesk.com
       - static.zdassets.com
       - ekr.zdassets.com
+      - browser.sentry-cdn.com
+      - sentry.system.data.gov.au
       objectSrc:
       - "''none''"
-      sandbox: # We run the sandbox because we have to have unsafe-inline, when we remove unsafe inline we should remove this
-      - allow-scripts
-      - allow-same-origin
-      - allow-popups
-      - allow-forms
-      - allow-popups-to-escape-sandbox
-      reportUri: https://sdga.report-uri.com/r/d/csp/enforce
+      reportUri: "https://sentry.system.data.gov.au/api/4/security/?sentry_key=b456c7ab8f784b569ce32faa04eb238e"
 
   ## Configures helmet.js - config will be converted to JSON and passed to
   ## https://github.com/helmetjs/helmet
   helmet:
     hsts:
       maxAge: 31536000
-      includeSubdomains: true
+      includeSubdomains: false
       preload: true
 
   ## Configures cross-origin resource sharing - will be converted to JSON and passed
@@ -621,10 +628,10 @@ gateway:
 
   resources:
     requests:
-      cpu: 100m
-      memory: 50Mi
+      cpu: 50m
+      memory: 75Mi
     limits:
-      cpu: 200m
+      cpu: 100m
 
   ## Redirect HTTP urls to HTTPs urls
   # enableHttpsRedirection: false
@@ -634,6 +641,8 @@ gateway:
 
 ## Configures the service that puts datasets and organisations into elasticsearch
 indexer:
+  # image:
+  #   tag: 0.0.50-RC3
   elasticsearch:
     ## How many shards and replicas to use when creating a new index. Generally, more
     ## shards mean that the index will be split among more data nodes, and more replicas
@@ -644,20 +653,20 @@ indexer:
     replicas: 4
   resources:
     requests:
-      cpu: 200m
+      cpu: 100m
       memory: 500Mi
     limits:
-      cpu: 500m
+      cpu: 250m
 
 ## Configures the TerriaJS server responsible for serving preview maps.
 preview-map:
   replicas: 2
   resources:
     requests:
-      cpu: 50m
-      memory: 100Mi
+      cpu: 100m
+      memory: 750Mi
     limits:
-      cpu: 200m
+      cpu: 300m
 
 ## Configures the registry, which holds information about datasets, distributions,
 ## organisations etc and distributes it.
@@ -679,8 +688,8 @@ registry-api:
       # Resources for the full deployment, as per other resource declarations
       resources:
         requests:
-          cpu: 500m
-          memory: 1000Mi
+          cpu: 300m
+          memory: 1250Mi
         limits:
           cpu: 2000m
 
@@ -695,10 +704,10 @@ registry-api:
 
       resources:
         requests:
-          cpu: 50m
-          memory: 250Mi
+          cpu: 25m
+          memory: 300Mi
         limits:
-          cpu: 1000m
+          cpu: 250m
 
   ## The registry api is able to be split into two kinds of deployments: full, which does everything
   ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
@@ -719,13 +728,15 @@ registry-api:
 
 ## Configures the API that connects to ElasticSearch to perform searches.
 search-api:
+  # image:
+  #   tag: 0.0.50-RC3
   replicas: 2
   resources:
     requests:
-      cpu: 50m
+      cpu: 20m
       memory: 500Mi
     limits:
-      cpu: 1000m
+      cpu: 100m
 
 ## Configures the database used to store session information by passport js, if
 ## one is being used.
@@ -736,7 +747,7 @@ web-server:
   ## Autoscaler settings - the min and max number of pods to use
   autoscaler:
     minReplicas: 2
-    maxReplicas: 4
+    maxReplicas: 5
 
   ## Whether to disable the ability to log in in the UI - set this to true if
   ## you don't want to use any account features.
@@ -744,7 +755,7 @@ web-server:
 
   ## If you're replacing an existing system, you can set its url here to display a
   ## banner allowing people to go back if they don't like the new system.
-  fallbackUrl: "https://data.gov.au"
+  fallbackUrl: "https://data.gov.au/data/"
 
   gapiIds:
     - "UA-92539508-1"
@@ -752,10 +763,10 @@ web-server:
 
   resources:
     requests:
-      cpu: 100m
+      cpu: 25m
       memory: 50Mi
     limits:
-      cpu: 200m
+      cpu: 50m
 
   # Google Analytics Ids to collect analytics data from the frontend
   # gapiIds:
@@ -769,10 +780,10 @@ web-server:
 minion-broken-link:
   resources:
     requests:
-      cpu: 100m
-      memory: 200Mi
+      cpu: 50m
+      memory: 250Mi
     limits:
-      cpu: 500m
+      cpu: 100m
       memory: 1000Mi
   domainWaitTimeConfig:
     data.csiro.au: 5
@@ -784,10 +795,10 @@ minion-broken-link:
 minion-format:
   resources:
     requests:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 10m
+      memory: 50Mi
     limits:
-      cpu: 500m
+      cpu: 50m
       memory: 500Mi
 
 ## Settings for the linked data rating minion, which determines a rating for a dataset
@@ -795,10 +806,10 @@ minion-format:
 minion-linked-data-rating:
   resources:
     requests:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 10m
+      memory: 50Mi
     limits:
-      cpu: 500m
+      cpu: 50m
       memory: 500Mi
 
 ## Settings for the visualization minion, which looks at tabular data in order to
@@ -807,9 +818,9 @@ minion-visualization:
   resources:
     requests:
       cpu: 100m
-      memory: 200Mi
+      memory: 100Mi
     limits:
-      cpu: 1000m
+      cpu: 500m
       memory: 500Mi
 
 # Settings for the admin API, which allows for changes to be made to the magda
@@ -820,7 +831,7 @@ admin-api:
   
   resources:
     requests:
-      cpu: 50m
+      cpu: 10m
       memory: 50Mi
     limits:
-      cpu: 200m
+      cpu: 50m

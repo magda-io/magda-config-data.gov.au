@@ -12,6 +12,39 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 
 # Upgrade Guide:
 
+## 0.0.51
+
+This moves the readiness check for gateway, which doesn't propagate properly into the GKE health check. Before you start, turn the GKE health check up to 300 second intervals and 10 unhealthy threshold to give yourself some time.
+
+This version includes a pretty serious regions index upgrade, which requires a new elasticsearch upgrade before the search-api OR indexer can be upgraded. So...
+
+1. Add to the config for `search-api` AND `indexer`:
+
+```yaml
+  image:
+    tag: 0.0.50-RC3
+```
+
+2. Open the GCE health check page ready to quickly change it! To give yourself more time, change the failure threshold and timeout to as long as you can make it.
+
+3. Run `helm upgrade` as above.
+
+4. (while helm upgrade is running) Change the health check URL in GCE over to `/status/live`.
+
+5. (while helm upgrade is running) Run `kubectl edit deployment search-api` and manually edit the readiness and liveness check urls to `/v0/datasets`.
+
+6. Wait for helm upgrade to finish.
+
+7. Use `kubectl port-forward <kibana pod id> 5601` to connect to kibana and `GET /_cluster/health` to make sure everything's finished initializing. 
+
+8. Remove the image tag from the `indexer` config, run `helm upgrade` again with `--no-hooks` and wait for it to finish indexing the new regions index
+
+9. Remove the `image.tag` declaration from the config from `search-api` and `helm upgrade` with `--no-hooks` again
+
+10. Use `kubectl edit` to change the readiness/liveness check for search-api back to their usual values in search-api/deployment.yaml
+
+11. Restore the normal values in the health check for failure threshold and timeout (should be 70 seconds and 10 failures).
+
 ## 0.0.50
 Before helm upgrade:
 In the content db:
