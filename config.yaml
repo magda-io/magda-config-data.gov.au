@@ -565,6 +565,7 @@ gateway:
   ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
   ckanRedirectionDomain: "data.gov.au"
   ckanRedirectionPath: "/data"
+  enableCkanRedirection: true
   enableHttpsRedirection: true
 
   ## Configure the autoscaler
