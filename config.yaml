@@ -538,7 +538,7 @@ elasticsearch:
         cpu: 50m
         memory: 1500Mi
       limits:
-        cpu: 100m
+        cpu: 250m
 
   ## Settings for the master nodes - these keep track of the data nodes as they go up
   ## and down and keep track of what the current state of the data should be.
@@ -549,7 +549,7 @@ elasticsearch:
         cpu: 25m
         memory: 1000Mi
       limits:
-        cpu: 100m
+        cpu: 250m
 
 ## The gateway accepts incoming connections and directs them to the appropriate api pod,
 ## or the web server pod
@@ -590,35 +590,28 @@ gateway:
     directives:
       scriptSrc:
       - "''self''"
-      - "''unsafe-inline''" # For VWO, hopefully we can remove this soon
-      - "data:" # Also for VWO
+      - "''unsafe-inline''" # still being used by rollbar
       - browser-update.org
-      - dev.visualwebsiteoptimizer.com
       - platform.twitter.com
       - www.googletagmanager.com
       - www.google-analytics.com
       - rum-static.pingdom.net
-      - https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.4.1/rollbar.min.js
       - https://tagmanager.google.com/debug
       - assets.zendesk.com
       - static.zdassets.com
       - ekr.zdassets.com
+      - browser.sentry-cdn.com
+      - sentry.system.data.gov.au
       objectSrc:
       - "''none''"
-      sandbox: # We run the sandbox because we have to have unsafe-inline, when we remove unsafe inline we should remove this
-      - allow-scripts
-      - allow-same-origin
-      - allow-popups
-      - allow-forms
-      - allow-popups-to-escape-sandbox
-      reportUri: https://sdga.report-uri.com/r/d/csp/enforce
+      reportUri: "https://sentry.system.data.gov.au/api/4/security/?sentry_key=b456c7ab8f784b569ce32faa04eb238e"
 
   ## Configures helmet.js - config will be converted to JSON and passed to
   ## https://github.com/helmetjs/helmet
   helmet:
     hsts:
       maxAge: 31536000
-      includeSubdomains: true
+      includeSubdomains: false
       preload: true
 
   ## Configures cross-origin resource sharing - will be converted to JSON and passed
@@ -714,7 +707,7 @@ registry-api:
           cpu: 25m
           memory: 300Mi
         limits:
-          cpu: 50m
+          cpu: 250m
 
   ## The registry api is able to be split into two kinds of deployments: full, which does everything
   ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
