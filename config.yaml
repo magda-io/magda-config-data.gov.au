@@ -350,13 +350,13 @@ connectors:
       id: vic-cardinia
       name: Cardinia Shire Council
       sourceUrl: https://data-cscgis.opendata.arcgis.com/data.json
-      schedule: 0 0 * * *
+      schedule: 30 11 * * *
     - image:
         name: magda-project-open-data-connector
       id: nt-darwin
       name: City of Darwin
       sourceUrl: https://open-darwin.opendata.arcgis.com/data.json
-      schedule: 0 0 * * *
+      schedule: 0 12 * * *
 
 
 ## Settings for the ingress. You need one of these if you want to do SSL or use the Google CDN on GKE
