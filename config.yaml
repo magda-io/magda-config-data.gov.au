@@ -153,13 +153,13 @@ connectors:
         name: magda-project-open-data-connector
       id: act
       name: ACT Government data.act.gov.au
-      sourceUrl: http://www.data.act.gov.au/data.json
+      sourceUrl: https://www.data.act.gov.au/data.json
       schedule: 0 0 */3 * *
     - image:
         name: magda-project-open-data-connector
       id: actmapi
       name: ACT Government ACTMAPi
-      sourceUrl: http://actmapi-actgov.opendata.arcgis.com/data.json
+      sourceUrl: https://actmapi-actgov.opendata.arcgis.com/data.json
       schedule: 45 0 */3 * *
     - image:
         name: magda-csw-connector
@@ -172,7 +172,7 @@ connectors:
         name: magda-csw-connector
       id: aodn
       name: Australian Oceans Data Network
-      sourceUrl: http://catalogue.aodn.org.au/geonetwork/srv/eng/csw
+      sourceUrl: https://catalogue.aodn.org.au/geonetwork/srv/eng/csw
       pageSize: 100
       schedule: 30 1 */3 * *
     # - image:
@@ -193,7 +193,7 @@ connectors:
         name: magda-project-open-data-connector
       id: hobart
       name: City of Hobart Open Data Portal
-      sourceUrl: http://data-1-hobartcc.opendata.arcgis.com/data.json
+      sourceUrl: https://data-1-hobartcc.opendata.arcgis.com/data.json
       schedule: 30 2 */3 * *
     - image:
         name: magda-project-open-data-connector
@@ -241,7 +241,7 @@ connectors:
         name: magda-project-open-data-connector
       id: logan
       name: Logan City Council
-      sourceUrl: http://data-logancity.opendata.arcgis.com/data.json
+      sourceUrl: https://data-logancity.opendata.arcgis.com/data.json
       schedule: 30 5 */3 * *
     - image:
         name: magda-project-open-data-connector
@@ -294,7 +294,7 @@ connectors:
     #     name: magda-csw-connector
     #   id: qspatial
     #   name: 'Queensland Spatial Catalogue - QSpatial '
-    #   sourceUrl: "http://qldspatial.information.qld.gov.au/catalogueadmin/csw"
+    #   sourceUrl: "https://qldspatial.information.qld.gov.au/catalogueadmin/csw"
     #   pageSize: 100
     #   schedule: 0 14 */3 * *
     - image:
@@ -345,6 +345,19 @@ connectors:
       name: CSIRO
       sourceUrl: https://data.csiro.au/dap/ws/v2/
       pageSize: 100
+    - image:
+        name: magda-project-open-data-connector
+      id: vic-cardinia
+      name: Cardinia Shire Council
+      sourceUrl: https://data-cscgis.opendata.arcgis.com/data.json
+      schedule: 30 11 * * *
+    - image:
+        name: magda-project-open-data-connector
+      id: nt-darwin
+      name: City of Darwin
+      sourceUrl: https://open-darwin.opendata.arcgis.com/data.json
+      schedule: 0 12 * * *
+
 
 ## Settings for the ingress. You need one of these if you want to do SSL or use the Google CDN on GKE
 ## Otherwise using the built-in Kubernetes LoadBalancer works ok.
