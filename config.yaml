@@ -60,6 +60,8 @@ global:
   ## Whether to disable database authentication - useful in development, a very very bad
   ## idea in production
   # noDbAuth: false
+  
+  enablePriorityClass: true
 
 ## Tags allow for services to be turned on and off on the fly... e.g. if you don't need
 ## to send emails, turn the correspondence-api off
@@ -90,6 +92,7 @@ tags:
   session-db: true
   web-server: true
   connectors: true
+  priorities: true
 
   ## Whether to use an ingress, which is necessary for HTTPS and using the Google CDN with
   ## Google Kubernetes Engine. By default this is off, and access is provided to the cluster
