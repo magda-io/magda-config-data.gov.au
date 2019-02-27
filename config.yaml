@@ -601,11 +601,12 @@ gateway:
     maxReplicas: 5
 
   ## Client ids to use for OAuth authentication
-  # auth:
+  auth:
     ## Client id for facebook
     # facebookClientId: ""
     ## Client id for google
     # googleClientId: ""
+    ckanAuthenticationUrl: https://data.gov.au/data
 
   ## Configures the Content Security Policy that will be set on all responses -
   ## the contents will be converted to JSON and passed into https://github.com/helmetjs/csp
@@ -655,9 +656,6 @@ gateway:
       memory: 75Mi
     limits:
       cpu: 100m
-
-  ## Redirect HTTP urls to HTTPs urls
-  # enableHttpsRedirection: false
 
   ## Turn on HTTP basic authentication - this uses secrets created by the create-secret script
   # enableWebAccessControl: false
@@ -752,7 +750,7 @@ registry-api:
 ## Configures the API that connects to ElasticSearch to perform searches.
 search-api:
   # image:
-  #   tag: 0.0.50-RC3
+  #   tag: 0.0.52-RC2
   replicas: 2
   resources:
     requests:

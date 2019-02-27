@@ -12,6 +12,23 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 
 # Upgrade Guide:
 
+## 0.0.53
+
+Run `sql-migrations/add-favicon.sql` in the content-db first, then `helm upgrade` as usual.
+
+This also involves an elasticsearch index upgrade, so add...
+
+```yaml
+  image:
+    tag: 0.0.52-RC2
+```
+
+... to the config for `search-api` before running helm upgrade. Look at the indexer logs, when it's finished indexing then remove those lines and run helm upgrade again.
+
+## 0.0.52
+
+Nothing special this time, just helm upgrade as usual
+
 ## 0.0.51
 
 This moves the readiness check for gateway, which doesn't propagate properly into the GKE health check. Before you start, turn the GKE health check up to 300 second intervals and 10 unhealthy threshold to give yourself some time.
