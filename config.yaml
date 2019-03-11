@@ -626,10 +626,10 @@ gateway:
       - static.zdassets.com
       - ekr.zdassets.com
       - browser.sentry-cdn.com
-      - sentry.system.data.gov.au
+      - sentry.cloud.gov.au
       objectSrc:
       - "''none''"
-      reportUri: "https://sentry.system.data.gov.au/api/4/security/?sentry_key=b456c7ab8f784b569ce32faa04eb238e"
+      reportUri: "https://sentry.cloud.gov.au/api/3/security/?sentry_key=af6f917c068e4756837fca7c2f5adf17e"
 
   ## Configures helmet.js - config will be converted to JSON and passed to
   ## https://github.com/helmetjs/helmet
