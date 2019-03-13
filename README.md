@@ -12,6 +12,18 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 
 # Upgrade Guide:
 
+## 0.0.54
+
+This also involves another elasticsearch index upgrade, so add...
+
+```yaml
+  image:
+    tag: 0.0.53-RC1
+```
+
+... to the config for `search-api` before running helm upgrade. Look at the indexer logs, when it's finished indexing then remove those lines and run helm upgrade again.
+
+
 ## 0.0.53
 
 Run `sql-migrations/add-favicon.sql` in the content-db first, then `helm upgrade` as usual.
