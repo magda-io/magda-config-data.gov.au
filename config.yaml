@@ -751,7 +751,7 @@ registry-api:
 ## Configures the API that connects to ElasticSearch to perform searches.
 search-api:
   # image:
-  #   tag: 0.0.52-RC2
+  #   tag: 0.0.53-RC1
   replicas: 2
   resources:
     requests:
