@@ -548,7 +548,7 @@ elasticsearch:
         cpu: 500m
         memory: 5000Mi
       limits:
-        cpu: 1500m
+        cpu: 1900m
 
   ## Settings for the client nodes - this accepts HTTP connections from search-api and
   ## indexer and forwards them to the data nodes.
@@ -663,8 +663,6 @@ gateway:
 
 ## Configures the service that puts datasets and organisations into elasticsearch
 indexer:
-  # image:
-  #   tag: 0.0.50-RC3
   elasticsearch:
     ## How many shards and replicas to use when creating a new index. Generally, more
     ## shards mean that the index will be split among more data nodes, and more replicas
