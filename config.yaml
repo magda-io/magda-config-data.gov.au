@@ -797,6 +797,7 @@ web-server:
 ## Settings for the broken link minion, which crawls URLs of distributions in order
 ## to determine whether they're still available.
 minion-broken-link:
+  schedule: "0 0 */7 * *"
   resources:
     requests:
       cpu: 50m
