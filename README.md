@@ -12,6 +12,10 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 
 # Upgrade Guide:
 
+## 0.0.55
+
+No elasticsearch upgrades this time, although there has been a slight tweak to the default email templates that you might want to incorporate - the `question.html` email now has a ` {{message.note}}` field that explains why the default email address is getting a message in the event that an email can't be extracted from either the dataset or publisher contact point.
+
 ## 0.0.54
 
 This also involves another elasticsearch index upgrade, so add...
