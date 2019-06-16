@@ -323,6 +323,12 @@ connectors:
       pageSize: 100
       schedule: 40 * * * *
     - image:
+        name: magda-project-open-data-connector
+      id: southerngrampians
+      name: Southern Grampians Shire Council Smart City and Open Data portal
+      sourceUrl: https://www.connectgh.com.au/data.json
+      schedule: 0 7 */3 * *     
+    - image:
         name: magda-csw-connector
       id: listtas
       name: Tasmania TheList
@@ -340,7 +346,7 @@ connectors:
         name: magda-ckan-connector
       id: vic
       name: Victoria Government
-      sourceUrl: https://www.data.vic.gov.au/data/
+      sourceUrl: https://discover.data.vic.gov.au/
       pageSize: 100
       schedule: 50 * * * *
     - image:
