@@ -198,7 +198,7 @@ connectors:
       name: Brisbane City Council
       sourceUrl: https://www.data.brisbane.qld.gov.au/data/
       pageSize: 100
-      schedule: 10 * * * *
+      schedule: 10 * */1 * *
     - image:
         name: magda-project-open-data-connector
       id: hobart
@@ -367,7 +367,13 @@ connectors:
       id: nt-darwin
       name: City of Darwin
       sourceUrl: https://open-darwin.opendata.arcgis.com/data.json
-      schedule: 0 12 * * *
+      schedule: 0 12 */3 * *
+    - image:
+        name: magda-project-open-data-connector
+      id: southern-grampians
+      name: Southern Grampians Shire Council
+      sourceUrl: https://www.connectgh.com.au/data.json
+      schedule: 30 12 */3 * *
 
 
 ## Settings for the ingress. You need one of these if you want to do SSL or use the Google CDN on GKE
