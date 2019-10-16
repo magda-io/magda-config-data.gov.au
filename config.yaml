@@ -256,6 +256,12 @@ connectors:
       schedule: 30 5 */3 * *
     - image:
         name: magda-project-open-data-connector
+      id: melbournewater
+      name: Melbourne Water Corporation
+      sourceUrl: https://data-melbournewater.opendata.arcgis.com/data.json
+      schedule: 30 5 * * *
+    - image:
+        name: magda-project-open-data-connector
       id: melbourne
       name: Melbourne Data
       sourceUrl: https://data.melbourne.vic.gov.au/data.json
