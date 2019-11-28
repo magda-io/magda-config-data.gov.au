@@ -12,6 +12,16 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 
 # Upgrade Guide:
 
+## 0.0.56
+This also involves another elasticsearch index upgrade, so add...
+
+```yaml
+  image:
+    tag: 0.0.55-RC1
+```
+
+... to the config for `search-api` before running helm upgrade. Look at the indexer logs, when it's finished indexing then remove those lines and run helm upgrade again.
+
 ## 0.0.55
 
 No elasticsearch upgrades this time, although there has been a slight tweak to the default email templates that you might want to incorporate - the `question.html` email now has a ` {{message.note}}` field that explains why the default email address is getting a message in the event that an email can't be extracted from either the dataset or publisher contact point.
@@ -128,10 +138,17 @@ helm repo add magda-io https://charts.magda.io
 
 4. Install magda. The `--devel` flag allows us to install the latest RC version
 ```bash
-helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yaml --devel
+cd terraform/magda
 ```
 
-This will take a while for it to get everything set up. If you want to watch progress, run `kubectl get pods -w` in another terminal.
+```bash
+gcloud iam service-accounts keys create key.json --iam-account=$SERVICE_ACCOUNT_EMAIL
+```
+
+You will now have a `key.json` file in `terraform/magda`, containing a private key. We suggest you put this somewhere safe like a password manager.
+DO **NOT** CHECK IT INTO SOURCE CONTROL.
+
+#### 10. Grant service account permission
 
 5. No need to delete es-data pods manually, helm now does that :tada:.
 
