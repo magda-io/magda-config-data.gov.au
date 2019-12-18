@@ -96,6 +96,7 @@ tags:
   session-db: true
   web-server: true
   connectors: true
+  opa: true
 
   ## Whether to use an ingress, which is necessary for HTTPS and using the Google CDN with
   ## Google Kubernetes Engine. By default this is off, and access is provided to the cluster
