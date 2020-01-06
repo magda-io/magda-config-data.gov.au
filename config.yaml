@@ -506,7 +506,16 @@ authorization-api:
       cpu: 100m
       memory: 75Mi
     limits:
-      cpu: 200m
+      cpu: 300m
+
+  ## Configure the autoscaler
+  autoscaler:
+    ## whether to enable autoscaling
+    enabled: true
+    ## The minimum number of replicas to have
+    minReplicas: 2
+    ## The maximum number of replicas to have
+    maxReplicas: 5
 
 
 ## Settings for the authorization-db, which serves the authorization-api
@@ -535,10 +544,19 @@ content-api:
   
   resources:
     requests:
-      cpu: 25m
+      cpu: 100m
       memory: 75Mi
     limits:
-      cpu: 100m
+      cpu: 200m
+
+  ## Configure the autoscaler
+  autoscaler:
+    ## whether to enable autoscaling
+    enabled: true
+    ## The minimum number of replicas to have
+    minReplicas: 2
+    ## The maximum number of replicas to have
+    maxReplicas: 5
 
   ## Override the SCSS variables used by Magda's SCSS files. Look at the "_variables.scss"
   ## file in the magda code for details. Most customisation can be performed by setting
@@ -707,10 +725,10 @@ gateway:
 
   resources:
     requests:
-      cpu: 50m
+      cpu: 200m
       memory: 75Mi
     limits:
-      cpu: 100m
+      cpu: 300m
 
   ## Turn on HTTP basic authentication - this uses secrets created by the create-secret script
   # enableWebAccessControl: false
@@ -742,6 +760,15 @@ preview-map:
     limits:
       cpu: 300m
 
+  ## Configure the autoscaler
+  autoscaler:
+    ## whether to enable autoscaling
+    enabled: true
+    ## The minimum number of replicas to have
+    minReplicas: 2
+    ## The maximum number of replicas to have
+    maxReplicas: 5
+
 ## Configures the registry, which holds information about datasets, distributions,
 ## organisations etc and distributes it.
 registry-api:
@@ -757,6 +784,15 @@ registry-api:
   ## slow down over time, and needs to be restarted when this occurs.
   livenessProbe:
     timeoutSeconds: 5
+
+  ## Configure the autoscaler
+  autoscaler:
+    ## whether to enable autoscaling
+    enabled: true
+    ## The minimum number of replicas to have
+    minReplicas: 2
+    ## The maximum number of replicas to have
+    maxReplicas: 5
 
   ## The registry api is able to be split into two kinds of deployments: full, which does everything
   ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
@@ -782,10 +818,10 @@ registry-api:
 
       resources:
         requests:
-          cpu: 25m
+          cpu: 200m
           memory: 300Mi
         limits:
-          cpu: 250m
+          cpu: 500m
 
   ## The registry api is able to be split into two kinds of deployments: full, which does everything
   ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
@@ -817,10 +853,19 @@ search-api:
   replicas: 2
   resources:
     requests:
-      cpu: 20m
-      memory: 500Mi
+      cpu: 200m
+      memory: 600Mi
     limits:
-      cpu: 100m
+      cpu: 500m
+
+  ## Configure the autoscaler
+  autoscaler:
+    ## whether to enable autoscaling
+    enabled: true
+    ## The minimum number of replicas to have
+    minReplicas: 2
+    ## The maximum number of replicas to have
+    maxReplicas: 5
 
 ## Configures the database used to store session information by passport js, if
 ## one is being used.
@@ -830,6 +875,7 @@ search-api:
 web-server:
   ## Autoscaler settings - the min and max number of pods to use
   autoscaler:
+    enabled: true
     minReplicas: 2
     maxReplicas: 5
 
@@ -847,10 +893,10 @@ web-server:
 
   resources:
     requests:
-      cpu: 25m
+      cpu: 50m
       memory: 50Mi
     limits:
-      cpu: 50m
+      cpu: 100m
 
   # Google Analytics Ids to collect analytics data from the frontend
   # gapiIds:
@@ -924,3 +970,22 @@ admin-api:
       memory: 50Mi
     limits:
       cpu: 50m
+
+opa:
+  replicas: 2
+
+  resources:
+    requests:
+      cpu: 200m
+      memory: 50Mi
+    limits:
+      cpu: 500m
+
+  ## Configure the autoscaler
+  autoscaler:
+    ## whether to enable autoscaling
+    enabled: true
+    ## The minimum number of replicas to have
+    minReplicas: 2
+    ## The maximum number of replicas to have
+    maxReplicas: 5
