@@ -772,6 +772,9 @@ preview-map:
 ## Configures the registry, which holds information about datasets, distributions,
 ## organisations etc and distributes it.
 registry-api:
+  # image:
+  #   tag: 0.0.55-RC1
+
   ## Log level to use
   logLevel: INFO
 
@@ -849,7 +852,7 @@ registry-api:
 ## Configures the API that connects to ElasticSearch to perform searches.
 search-api:
   # image:
-  #   tag: 0.0.53-RC1
+  #   tag: 0.0.55-RC1
   replicas: 2
   resources:
     requests:
