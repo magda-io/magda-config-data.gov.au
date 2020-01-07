@@ -13,14 +13,28 @@ helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yam
 # Upgrade Guide:
 
 ## 0.0.56
-This also involves another elasticsearch index upgrade, so add...
+
+This is a complicated one. Add
 
 ```yaml
   image:
     tag: 0.0.55-RC1
 ```
 
-... to the config for `search-api` before running helm upgrade. Look at the indexer logs, when it's finished indexing then remove those lines and run helm upgrade again.
+... to the config for `search-api` AND `registry-api`, and under `tags:`, change `indexer` to:
+
+```
+  indexer: false
+```
+
+before running helm upgrade. This is because both the registry db and search indices have changed enough not to be backwards compatible, so we want to keep running the old versions of both APIs while the helm upgrade takes place. If the indexer is allowed to run during this process, it'll create new empty indices and then quit because it can't access the registry anymore, so turn it off before the upgrade.
+
+The DB migration for the registry in this version is incredibly heavy - on staging it takes 5-10 minutes, during which the registry will be mostly unavailable.
+
+Once helm finishes, immediately remove the `image` lines from `registry-api`, turn `indexer` back to `true` and run the helm upgrade again, this time with `--no-hooks`. This will change the registry over to the new version and allow the indexer to start.
+
+Monitor the indexer logs - once it has finished creating new indices for both `regions` and `datasets`, remove the `image` lines from `search-api` also.
+
 
 ## 0.0.55
 

@@ -532,7 +532,7 @@ cloud-sql-proxy:
       cpu: 300m
 
   ## The cloud sql instance to connect to
-  instanceConnectionName: terriajs:australia-southeast1:magda-staging
+  instanceConnectionName: terriajs:australia-southeast1:magda-staging-2
 
 ## A pod that combines all the databases if global.useCombinedDb is set to true
 # combined-db:
@@ -773,6 +773,9 @@ preview-map:
 ## Configures the registry, which holds information about datasets, distributions,
 ## organisations etc and distributes it.
 registry-api:
+  # image:
+  #   tag: 0.0.55-RC1
+
   ## Log level to use
   logLevel: INFO
 
@@ -849,8 +852,8 @@ registry-api:
 
 ## Configures the API that connects to ElasticSearch to perform searches.
 search-api:
-  image:
-    tag: 0.0.55-RC1
+  # image:
+  #   tag: 0.0.55-RC1
   replicas: 2
   resources:
     requests:
