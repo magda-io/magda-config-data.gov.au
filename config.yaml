@@ -774,6 +774,7 @@ preview-map:
 registry-api:
   # image:
   #   tag: 0.0.55-RC1
+  validateJsonSchema: false
 
   ## Log level to use
   logLevel: INFO
@@ -825,6 +826,7 @@ registry-api:
           memory: 300Mi
         limits:
           cpu: 500m
+
 
   ## The registry api is able to be split into two kinds of deployments: full, which does everything
   ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
