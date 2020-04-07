@@ -258,12 +258,6 @@ connectors:
       schedule: 30 5 */3 * *
     - image:
         name: magda-project-open-data-connector
-      id: melbournewater
-      name: Melbourne Water Corporation
-      sourceUrl: https://data-melbournewater.opendata.arcgis.com/data.json
-      schedule: 30 5 * * *
-    - image:
-        name: magda-project-open-data-connector
       id: melbourne
       name: Melbourne Data
       sourceUrl: https://data.melbourne.vic.gov.au/data.json
@@ -388,7 +382,13 @@ connectors:
       name: Southern Grampians Shire Council
       sourceUrl: https://www.connectgh.com.au/data.json
       schedule: 30 12 */3 * *
-
+    - image:
+        name: magda-project-open-data-connector
+      id: gbrmpa
+      name: GBRMPA Geoportal
+      sourceUrl: https://geoportal.gbrmpa.gov.au/data.json
+      schedule: 30 15 */3 * *
+      
       ## CKAN-only: Only get datasets that match this organisation name - you can only have one due to limitations
       ## in the CKAN API, if you need multiple organisations make multiple connectors.
       #allowedOrganisationName: "doee"
