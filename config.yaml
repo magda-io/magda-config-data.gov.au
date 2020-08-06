@@ -388,6 +388,13 @@ connectors:
       name: GBRMPA Geoportal
       sourceUrl: https://geoportal.gbrmpa.gov.au/data.json
       schedule: 30 15 */3 * *
+    - image:
+        name: magda-project-open-data-connector
+      id: launceston
+      name: City of Launceston Open Data
+      sourceUrl: https://opendata.launceston.tas.gov.au/data.json
+      schedule: 0 3 */3 * *
+      
       
       ## CKAN-only: Only get datasets that match this organisation name - you can only have one due to limitations
       ## in the CKAN API, if you need multiple organisations make multiple connectors.
