@@ -217,12 +217,6 @@ connectors:
       sourceUrl: https://data-1-hobartcc.opendata.arcgis.com/data.json
       schedule: 30 2 */3 * *
     - image:
-        name: magda-project-open-data-connector
-      id: launceston
-      name: City of Launceston Open Data
-      sourceUrl: https://data-launceston.opendata.arcgis.com/data.json
-      schedule: 0 3 */3 * *
-    - image:
         name: magda-csw-connector
       id: marlin
       name: CSIRO Marlin
