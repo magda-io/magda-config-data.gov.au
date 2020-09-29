@@ -2,20 +2,26 @@ terraform {
   # The modules used in this example have been updated with 0.12 syntax, which means the example is no longer
   # compatible with any versions below 0.12.
   required_version = ">= 0.12"
+  required_providers {
+    helm       = "1.2.4"
+    kubernetes = "1.10.0"
+    random     = "2.2.1"
+    null       = "2.1.2"
+  }
 }
 
 provider "google-beta" {
   version     = ">= 2.11.0"
   project     = var.project
   region      = var.region
-  credentials = "${var.credential_file_path}"
+  credentials = var.credential_file_path
 }
 
 provider "google" {
   version     = ">= 2.11.0"
   project     = var.project
   region      = var.region
-  credentials = "${var.credential_file_path}"
+  credentials = var.credential_file_path
 }
 
 locals {
@@ -59,7 +65,6 @@ module "cluster" {
   source               = "../google-cluster"
   project              = var.project
   region               = var.region
-  kubernetes_dashboard = var.kubernetes_dashboard
   machine_type         = var.cluster_node_pool_machine_type
 }
 
@@ -83,40 +88,76 @@ resource "kubernetes_cluster_role_binding" "default_service_acc_role_binding" {
   ]
 }
 
-resource "kubernetes_namespace" "magda_namespace" {
+resource "kubernetes_namespace" "kr_namespace" {
   metadata {
-    name = "${var.namespace}"
+    name = "kubernetes-replicator"
   }
   depends_on = [
     kubernetes_cluster_role_binding.default_service_acc_role_binding
   ]
 }
 
+resource "kubernetes_namespace" "magda_namespace" {
+  metadata {
+    name = var.namespace
+  }
+  depends_on = [
+    kubernetes_cluster_role_binding.default_service_acc_role_binding
+  ]
+}
+
+resource "helm_release" "kr_helm_release" {
+  name = "magda"
+  # or repository = "../../helm" for local repo
+  repository    = "https://helm.mittwald.de"
+  chart         = "kubernetes-replicator"
+  timeout       = 600
+  force_update  = true
+  wait          = true
+  skip_crds     = false
+
+  namespace = "kubernetes-replicator"
+
+  depends_on = [
+    kubernetes_cluster_role_binding.default_service_acc_role_binding,
+    kubernetes_namespace.magda_namespace,
+    kubernetes_namespace.kr_namespace,
+    kubernetes_secret.auth_secrets,
+    kubernetes_secret.db_passwords
+  ]
+}
+
+resource "null_resource" "update_helm_chart" {
+  provisioner "local-exec" {
+    command = "rm -Rf ../../chart/charts && helm repo add magda-io https://charts.magda.io && helm dep up ../../chart"
+  }
+}
+
 resource "helm_release" "magda_helm_release" {
   name = "magda"
   # or repository = "../../helm" for local repo
-  repository = "https://charts.magda.io/"
-  chart      = "magda"
-  timeout    = 1800
+  repository    = "../.."
+  chart         = "chart"
+  devel         = var.allow_dev_magda_version
+  timeout       = 3600
+  force_update  = true
+  wait          = true
+  skip_crds     = false
 
-  namespace = "${var.namespace}"
-
-  values = [
-    "${file("../../config.yaml")}"
-  ]
+  namespace = var.namespace
 
   set {
-    name  = "externalUrl"
+    name  = "global.externalUrl"
     value = local.runtime_external_url
   }
 
   set {
-    name  = "useCombinedDb"
+    name  = "global.useCombinedDb"
     value = true
   }
 
   set {
-    name  = "useCloudSql"
+    name  = "global.useCloudSql"
     value = false
   }
 
@@ -131,15 +172,27 @@ resource "helm_release" "magda_helm_release" {
   }
 
   set {
-    name  = "gateway.service.type"
+    name  = "magda.magda-core.gateway.service.type"
     value = "NodePort"
+  }
+
+  set {
+    name  = "global.openfaas.mainNamespace"
+    value = "openfaas"
+  }
+
+  set {
+    name  = "global.openfaas.namespacePrefix"
+    value = var.namespace
   }
 
   depends_on = [
     kubernetes_cluster_role_binding.default_service_acc_role_binding,
     kubernetes_namespace.magda_namespace,
     kubernetes_secret.auth_secrets,
-    kubernetes_secret.db_passwords
+    kubernetes_secret.db_passwords,
+    helm_release.kr_helm_release,
+    null_resource.update_helm_chart
   ]
 }
 

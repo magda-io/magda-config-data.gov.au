@@ -7,7 +7,9 @@ Keep in mind that Data.gov.au uses a number of services that exist outside Kuber
 # To upgrade
 ```
 helm repo update
-helm upgrade magda magda-io/magda --wait --timeout 30000 --install -f config.yaml --version=<INSERT VERSION HERE (e.g. "0.0.49-RC2")>
+# download helm charts dependencies 
+helm dep up ./chart
+helm upgrade magda ./chart --wait --timeout 30000s --install -f config.yaml --version=<INSERT VERSION HERE (e.g. "0.0.49-RC2")>
 ```
 
 # Upgrade Guide:
