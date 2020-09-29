@@ -73,7 +73,7 @@ global:
     includeInitialJobs: false
 
     ## Whether to run recurring jobs on the schedule specified per connector.
-    includeCronJobs: true
+    includeCronJobs: false
 
   ## Settings for configuring Open Functions as a Service, which is used for some inconsistent
   ## workloads in Magda
@@ -602,7 +602,7 @@ magda:
           cpu: 300m
 
       ## The cloud sql instance to connect to
-      instanceConnectionName: terriajs:australia-southeast1:magda-prod
+      instanceConnectionName: terriajs:australia-southeast1:magda-staging-3
 
     ## A pod that combines all the databases if global.useCombinedDb is set to true
     # combined-db:
@@ -641,7 +641,9 @@ magda:
 
       ## The default recipient to email when there's no other choice - e.g. when asking a
       ## question about a dataset for which there's no organisational email
-      defaultRecipient: "data@digital.gov.au"
+      defaultRecipient: "magda-test@googlegroups.com"
+
+      alwaysSendToDefaultRecipient: true
 
       ## The hostname of the SMTP server to use - the password should be in a secret
       smtpHostname: "smtp.mailgun.org"
