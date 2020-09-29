@@ -117,7 +117,9 @@ tags:
   ## Whether to use an ingress, which is necessary for HTTPS and using the Google CDN with
   ## Google Kubernetes Engine. By default this is off, and access is provided to the cluster
   ## through a Kubernetes LoadBalancer service
-  ingress: true
+  ## Magda's built-in ingress chart certificate object api version is a bit old for newer version cert manager
+  ## We included a forked version in this repo
+  ingress: false
 
   ## Priority classes - see explanation under "enablePriorityClasses" above
   priorities: true
@@ -415,6 +417,26 @@ connector-launceston:
       #       creation:
       #         isOpenData: true
 
+## Settings for the ingress. You need one of these if you want to do SSL or use the Google CDN on GKE
+## Otherwise using the built-in Kubernetes LoadBalancer works ok.
+ingress:
+  ## The hostname of the site
+  hostname: search.data.gov.au
+  ## The name of the external ip to use - used when using the GCE ingress type
+  ipName: search-data-gov-au-ingress
+  ## The class of the ingress - if running on GKE, gce will automatically work, otherwise you
+  ## can use "nginx" which requires extra setup
+  ingressClass: gce
+  ## Whether to enable TLS - requires a TLS secret to be set:
+  ## https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
+  enableTls: true
+  ## Name of the tls secret, defaults to "magda-cert-tls"
+  tlsSecretName: "magda-cert-tls"
+  ## Domains to attempt to obtain an SSL certificate for from let's encrypt, if using certmanager
+  ## (requires extra setup)
+  domains:
+    - search.data.gov.au
+    - letest.search.data.gov.au
 
 # All core components are configurable under magda / magda-core instead
 # connectors & minions are not core components anymore
@@ -475,27 +497,6 @@ magda:
         memory: 500Mi
 
   magda-core:
-
-    ## Settings for the ingress. You need one of these if you want to do SSL or use the Google CDN on GKE
-    ## Otherwise using the built-in Kubernetes LoadBalancer works ok.
-    ingress:
-      ## The hostname of the site
-      hostname: search.data.gov.au
-      ## The name of the external ip to use - used when using the GCE ingress type
-      ipName: search-data-gov-au-ingress
-      ## The class of the ingress - if running on GKE, gce will automatically work, otherwise you
-      ## can use "nginx" which requires extra setup
-      ingressClass: gce
-      ## Whether to enable TLS - requires a TLS secret to be set:
-      ## https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/
-      enableTls: true
-      ## Name of the tls secret, defaults to "magda-cert-tls"
-      tlsSecretName: "magda-cert-tls"
-      ## Domains to attempt to obtain an SSL certificate for from let's encrypt, if using certmanager
-      ## (requires extra setup)
-      domains:
-        - search.data.gov.au
-        - letest.search.data.gov.au
 
     ## Below are individual settings for services. All services can be customised as follows:
     # servicename:
