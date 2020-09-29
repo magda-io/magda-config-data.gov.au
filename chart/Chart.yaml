@@ -8,6 +8,10 @@ dependencies:
     version: 0.0.57
     repository: https://charts.magda.io
 
+  - name: ingress
+    version: 0.0.57
+    repository: file://../ingress
+
   ## Data.gov.au connector to provide some initial data. Remove this if you
   ## don't want any data.gov.au connector
   - name: magda-ckan-connector
