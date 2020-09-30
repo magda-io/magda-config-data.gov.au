@@ -729,6 +729,8 @@ magda:
       ckanRedirectionPath: "/data"
       enableCkanRedirection: true
 
+      replicas: 2
+
       ## Configure the autoscaler
       autoscaler:
         ## whether to enable autoscaling
@@ -948,6 +950,7 @@ magda:
 
     ## The server used for serving the web application to users.
     web-server:
+      replicas: 2
       ## Autoscaler settings - the min and max number of pods to use
       autoscaler:
         enabled: true
