@@ -785,7 +785,10 @@ magda:
       ## Configures cross-origin resource sharing - will be converted to JSON and passed
       ## to https://www.npmjs.com/package/cors#configuring-cors
       cors:
-        origin: /data\.gov.au$/
+        origin:
+        - https://data.gov.au
+        - https://search.data.gov.au
+        - https://nationalmap.gov.au
         
       ## Enables authorization, include a list of authorization options at /auth/providers
       ## and a simple form at /auth that allows you to test login and logout functionality
