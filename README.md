@@ -16,6 +16,19 @@ helm upgrade magda ./chart --wait --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## 0.0.58-rc.3
+
+In order to minimise the downtime during the migration, we skipped the version 0.0.57 and jumped to RC release 0.0.58-rc.3.
+
+Since 0.0.57, we started to use `local deploy chart` based approach to deploy Magda. We defined Magda components as dependecies in file [Chart.yaml](chart/Chart.yaml). You can specify the version required in the same file as well.
+
+As connectors are moved out from Magda main repo and serves as external extensions now, to add a new connector, you will need:
+- add the required connector type as a dependecy in [Chart.yaml](chart/Chart.yaml) and assign an alias to it
+- add connector config in [config.yaml](./config.yaml)
+
+
+During the upgrade, we also upgraded [cert-manager](https://github.com/jetstack/cert-manager) to the latest version 1.02.
+
 ## 0.0.56
 
 This is a complicated one. Add
