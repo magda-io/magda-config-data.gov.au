@@ -468,8 +468,8 @@ magda:
   minion-format:
     resources:
       requests:
-        cpu: 10m
-        memory: 50Mi
+        cpu: 20m
+        memory: 100Mi
       limits:
         cpu: 50m
         memory: 500Mi
