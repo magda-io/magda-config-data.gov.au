@@ -346,7 +346,7 @@ connector-vic:
     schedule: 50 * * * *
     ignoreHarvestSources: []
     presetRecordAspects:
-      id: organization-details
+    - id: organization-details
       recordType: Organization
       data: 
         title: "Victoria Government"
