@@ -344,6 +344,14 @@ connector-vic:
     sourceUrl: https://discover.data.vic.gov.au/
     pageSize: 100
     schedule: 50 * * * *
+    ignoreHarvestSources: []
+    presetRecordAspects:
+      id: organization-details
+      recordType: Organization
+      data: 
+        title: "Victoria Government"
+        jurisdiction: "Victoria Government"
+
 
 connector-wa:
   config:
