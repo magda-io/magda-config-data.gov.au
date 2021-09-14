@@ -152,7 +152,7 @@ connector-dga:
     ## The base URL of the place to source data from
     sourceUrl: "https://data.gov.au/data/"
     ## When crawling through from beginning to end, how big should the individual requests be in records?
-    pageSize: 1000
+    pageSize: 100
     ## Crontab schedule for how often this should happen.
     schedule: "0 * * * *"
     ## CKAN-specific config: what harvest sources to ignore. * will ignore everything that's been harvested
@@ -344,6 +344,14 @@ connector-vic:
     sourceUrl: https://discover.data.vic.gov.au/
     pageSize: 100
     schedule: 50 * * * *
+    ignoreHarvestSources: []
+    presetRecordAspects:
+    - id: organization-details
+      recordType: Organization
+      data: 
+        title: "Victoria Government"
+        jurisdiction: "Victoria Government"
+
 
 connector-wa:
   config:
@@ -467,8 +475,8 @@ magda:
   minion-format:
     resources:
       requests:
-        cpu: 10m
-        memory: 50Mi
+        cpu: 20m
+        memory: 100Mi
       limits:
         cpu: 50m
         memory: 500Mi

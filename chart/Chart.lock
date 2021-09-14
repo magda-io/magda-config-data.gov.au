@@ -7,7 +7,7 @@ dependencies:
   version: 0.0.57
 - name: magda-ckan-connector
   repository: https://charts.magda.io
-  version: 0.0.57-0
+  version: 1.0.1
 - name: magda-project-open-data-connector
   repository: https://charts.magda.io
   version: 0.0.57-0
@@ -28,7 +28,7 @@ dependencies:
   version: 0.0.57-0
 - name: magda-ckan-connector
   repository: https://charts.magda.io
-  version: 0.0.57-0
+  version: 1.0.1
 - name: magda-project-open-data-connector
   repository: https://charts.magda.io
   version: 0.0.57-0
@@ -61,28 +61,28 @@ dependencies:
   version: 0.0.57-0
 - name: magda-ckan-connector
   repository: https://charts.magda.io
+  version: 1.0.1
+- name: magda-csw-connector
+  repository: https://charts.magda.io
+  version: 0.0.57-0
+- name: magda-ckan-connector
+  repository: https://charts.magda.io
+  version: 1.0.1
+- name: magda-ckan-connector
+  repository: https://charts.magda.io
+  version: 1.0.1
+- name: magda-csw-connector
+  repository: https://charts.magda.io
   version: 0.0.57-0
 - name: magda-csw-connector
   repository: https://charts.magda.io
   version: 0.0.57-0
 - name: magda-ckan-connector
   repository: https://charts.magda.io
-  version: 0.0.57-0
+  version: 1.0.1
 - name: magda-ckan-connector
   repository: https://charts.magda.io
-  version: 0.0.57-0
-- name: magda-csw-connector
-  repository: https://charts.magda.io
-  version: 0.0.57-0
-- name: magda-csw-connector
-  repository: https://charts.magda.io
-  version: 0.0.57-0
-- name: magda-ckan-connector
-  repository: https://charts.magda.io
-  version: 0.0.57-0
-- name: magda-ckan-connector
-  repository: https://charts.magda.io
-  version: 0.0.57-0
+  version: 1.0.1
 - name: magda-dap-connector
   repository: https://charts.magda.io
   version: 0.0.57-0
@@ -101,5 +101,5 @@ dependencies:
 - name: magda-project-open-data-connector
   repository: https://charts.magda.io
   version: 0.0.57-0
-digest: sha256:4d396af9a14fe29c1e77fe50139c90482ba1fdda82d79ee0db866958b7b43812
-generated: "2020-10-02T16:53:24.401611+10:00"
+digest: sha256:ddf5865139b2c55142b0c7725e784bf11e1b6fa60b88b536ee915d8bbda77db8
+generated: "2021-08-10T10:06:55.636493+10:00"
