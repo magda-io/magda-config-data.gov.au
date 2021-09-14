@@ -1,23 +1,23 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt
+  name: "letsencrypt"
 spec:
   acme:
-    server: {{- if .Values.useStaging }} "https://acme-staging-v02.api.letsencrypt.org/directory" {{- else }} https://acme-v02.api.letsencrypt.org/directory {{- end }}
+    server: {{- if .Values.useStaging }} "https://acme-staging-v02.api.letsencrypt.org/directory" {{- else }} "https://acme-v02.api.letsencrypt.org/directory" {{- end }}
     email: {{ .Values.acmeEmail }}
 
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: letsencrypt
+      name: "letsencrypt"
 
     solvers:
     # ACME DNS-01 provider configurations
     - dns01:
         route53:
-          region: ap-southeast-2
-          hostedZoneID: {{ .Values.hostedZoneID }}
-          accessKeyID: {{ .Values.accessKeyID }}
+          region: "ap-southeast-2"
+          hostedZoneID: {{ .Values.hostedZoneID | quote }}
+          accessKeyID: {{ .Values.accessKeyID | quote }}
           secretAccessKeySecretRef:
-            name: {{ .Values.secretAccessKeySecretRef.name }}
-            key: {{ .Values.secretAccessKeySecretRef.key }}
+            name: {{ .Values.secretAccessKeySecretRef.name | quote }}
+            key: {{ .Values.secretAccessKeySecretRef.key | quote }}
