@@ -610,7 +610,7 @@ magda:
           cpu: 300m
 
       ## The cloud sql instance to connect to
-      instanceConnectionName: terriajs:australia-southeast1:magda-staging-3
+      instanceConnectionName: terriajs:australia-southeast1:magda-staging-2
 
     ## A pod that combines all the databases if global.useCombinedDb is set to true
     # combined-db:
