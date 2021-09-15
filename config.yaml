@@ -966,6 +966,8 @@ magda:
         enabled: true
         minReplicas: 2
         maxReplicas: 5
+      
+      defaultContactEmail: "data@digital.gov.au"
 
       featureFlags:
         cataloguing: false
@@ -981,6 +983,12 @@ magda:
       ## If you're replacing an existing system, you can set its url here to display a
       ## banner allowing people to go back if they don't like the new system.
       fallbackUrl: "https://data.gov.au/data/"
+
+      openInExternalTerriaMapButtonText: "Open in NationalMap"
+      openInExternalTerriaMapTargetUrl: "https://nationalmap.gov.au/"
+      supportExternalTerriaMapV7: false
+
+      showContactButtonForNoContactPointDataset: false
 
       gapiIds:
         - "UA-92539508-1"
