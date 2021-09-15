@@ -841,6 +841,42 @@ magda:
           memory: 750Mi
         limits:
           cpu: 300m
+      serverConfig:
+        allowProxyFor:
+          - nicta.com.au
+          - gov.au
+          - csiro.au
+          - arcgis.com
+          - argo.jcommops.org
+          - www.abc.net.au
+          - geoserver.aurin.org.au
+          - mapsengine.google.com
+          - s3-ap-southeast-2.amazonaws.com
+          - adelaidecitycouncil.com
+          - www.dptiapps.com.au
+          - geoserver-123.aodn.org.au
+          - geoserver.imos.org.au
+          - nci.org.au
+          - static.nationalmap.nicta.com.au
+          - githubusercontent.com
+          - gov
+          - gov.uk
+          - gov.nz
+          - sample.aero3dpro.com.au
+          - static.map.terria.io
+          - nsw-digital-twin-data.terria.io
+          - nsw-digital-twin-data.terria.io:8080
+          - sixtest.nsw.gov.au
+          - nci.org.au
+          - dpe-im-api-airquality.azurewebsites.net
+          - services.aremi.data61.io
+          - livetraffic.com
+          - citydata.be.unsw.edu.au
+          - apps.in-adait.net:4000
+          - data.nsw.gov.au
+          - edu.au
+          - nsw.gov.au
+          
 
       ## Configure the autoscaler
       autoscaler:
