@@ -5,6 +5,12 @@ dependencies:
 - name: ingress
   repository: file://../ingress
   version: 0.0.57
+- name: magda-auth-internal
+  repository: https://charts.magda.io
+  version: 1.0.1
+- name: magda-auth-ckan
+  repository: https://charts.magda.io
+  version: 1.0.1
 - name: magda-ckan-connector
   repository: https://charts.magda.io
   version: 1.0.1
@@ -101,5 +107,5 @@ dependencies:
 - name: magda-project-open-data-connector
   repository: https://charts.magda.io
   version: 0.0.57-0
-digest: sha256:ddf5865139b2c55142b0c7725e784bf11e1b6fa60b88b536ee915d8bbda77db8
-generated: "2021-08-10T10:06:55.636493+10:00"
+digest: sha256:7c006d0b10e84852f73b4f444ecec98db527d628cc0971639c02d588fc0b3526
+generated: "2021-09-15T16:13:31.271641+10:00"

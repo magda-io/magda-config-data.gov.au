@@ -358,7 +358,7 @@ connector-wa:
     id: wa
     name: Western Australia Government
     sourceUrl: https://catalogue.data.wa.gov.au/
-    pageSize: 100
+    pageSize: 25
     schedule: 55 * * * *
 
 connector-dap:
@@ -475,7 +475,7 @@ magda:
   minion-format:
     resources:
       requests:
-        cpu: 20m
+        cpu: 50m
         memory: 100Mi
       limits:
         cpu: 50m
@@ -749,25 +749,24 @@ magda:
         ## The maximum number of replicas to have
         maxReplicas: 5
 
-      ## Client ids to use for OAuth authentication
-      auth:
-        ## Client id for facebook
-        # facebookClientId: ""
-        ## Client id for google
-        # googleClientId: ""
-        ckanAuthenticationUrl: https://data.gov.au/data
+      authPlugins:
+      - key: ckan
+        baseUrl: http://magda-auth-ckan
+      - key: internal
+        baseUrl: http://magda-auth-internal
         
-        ## If you want to use the Australian Department of Industry's VANguard service, put the details here:
-        # vanguardWsFedIdpUrl: https://authentication.business.gov.au/fas/v2/wsfed12/authenticate
-        # vanguardWsFedRealm: your-realm-here
+      ## If you want to use the Australian Department of Industry's VANguard service, put the details here:
+      # vanguardWsFedIdpUrl: https://authentication.business.gov.au/fas/v2/wsfed12/authenticate
+      # vanguardWsFedRealm: your-realm-here
+      # Currently, vanguard is not migrated to our new auth plugin system yet and only available via gateway `auth` config.
 
       ## Configures the Content Security Policy that will be set on all responses -
       ## the contents will be converted to JSON and passed into https://github.com/helmetjs/csp
       csp:
         directives:
           scriptSrc:
-          - "''self''"
-          - "''unsafe-inline''" # still being used by rollbar
+          - "'self'"
+          - "'unsafe-inline'" # still being used by rollbar
           - browser-update.org
           - platform.twitter.com
           - www.googletagmanager.com
@@ -780,7 +779,7 @@ magda:
           - browser.sentry-cdn.com
           - sentry.cloud.gov.au
           objectSrc:
-          - "''none''"
+          - "'none'"
           reportUri: "https://sentry.cloud.gov.au/api/3/security/?sentry_key=af6f917c068e4756837fca7c2f5adf17e"
 
       ## Configures helmet.js - config will be converted to JSON and passed to
@@ -1037,3 +1036,10 @@ magda:
         minReplicas: 2
         ## The maximum number of replicas to have
         maxReplicas: 5
+
+magda-auth-ckan:
+  ckanUrl: "https://data.gov.au/data"
+
+magda-auth-internal:
+  authPluginConfig:
+    loginFormExtraInfoContent: "Please contact system admin for account issues"
