@@ -501,14 +501,6 @@ magda:
         # shards: 1
         # replicas: 0
 
-    ## Configures the TerriaJS server responsible for serving preview maps.
-    preview-map:
-      image:
-        repository: docker.io/data61
-        tag: 0.0.57-0
-        pullPolicy: IfNotPresent
-        imagePullSecret: false
-
     ## Configures the registry, which holds information about datasets, distributions,
     ## organisations etc and distributes it.
     # registry-api:
