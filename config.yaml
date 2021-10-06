@@ -601,6 +601,10 @@ magda:
     ## A pod for proxying to Google Cloud SQL, the GCE managed database service.
     cloud-sql-proxy:
       replicas: 2
+      autoscaler:
+        enabled: true
+        minReplicas: 2
+        maxReplicas: 3
 
       resources:
         requests:
@@ -1025,6 +1029,8 @@ magda:
       supportExternalTerriaMapV7: false
 
       showContactButtonForNoContactPointDataset: false
+      discourseIntegrationDatasetPage: false
+      discourseIntegrationDistributionPage: false
 
       gapiIds:
         - "UA-92539508-1"
