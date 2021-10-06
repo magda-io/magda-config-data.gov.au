@@ -1025,6 +1025,8 @@ magda:
       supportExternalTerriaMapV7: false
 
       showContactButtonForNoContactPointDataset: false
+      discourseIntegrationDatasetPage: false
+      discourseIntegrationDistributionPage: false
 
       gapiIds:
         - "UA-92539508-1"
