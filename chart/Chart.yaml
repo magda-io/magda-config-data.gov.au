@@ -1,16 +1,24 @@
 apiVersion: v2
 name: "magda-config"
 description: ""
-version: "0.0.58"
+version: "0.0.60"
 kubeVersion: ">= 1.14.0-0"
 dependencies:
   - name: magda
-    version: 0.0.58-rc.3
+    version: 0.0.60
     repository: https://charts.magda.io
 
   - name: ingress
     version: 0.0.57
     repository: file://../ingress
+
+  - name: magda-auth-internal
+    version: 1.0.1
+    repository: https://charts.magda.io
+
+  - name: magda-auth-ckan
+    version: 1.0.1
+    repository: https://charts.magda.io
 
   ## Data.gov.au connector to provide some initial data. Remove this if you
   ## don't want any data.gov.au connector
