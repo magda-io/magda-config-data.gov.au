@@ -16,6 +16,12 @@ helm upgrade magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## 0.0.60
+
+v0.0.60 update elasticsearch dataset indice version to 47, which will trigger a full reindex.
+To prevent users from partial result & minimise the downtime, you can set `.Values.datasetsIndexVersion` to previous version `46` until reindex is completed.
+
+
 ## 0.0.58-rc.3
 
 In order to minimise the downtime during the migration, we skipped the version 0.0.57 and jumped to RC release 0.0.58-rc.3.
