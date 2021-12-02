@@ -252,6 +252,13 @@ connector-logan:
     sourceUrl: https://data-logancity.opendata.arcgis.com/api/feed/dcat-us/1.1.json
     schedule: 30 5 */3 * *
 
+connector-melbournewater:
+  config:
+    id: melbournewater
+    name: Melbourne Water Corporation
+    sourceUrl: https://data-melbournewater.opendata.arcgis.com/data.json
+    schedule: "30 4 */3 * *"
+
 connector-melbourne:
   config:
     id: melbourne
@@ -345,7 +352,6 @@ connector-vic:
         title: "Victoria Government"
         jurisdiction: "Victoria Government"
 
-
 connector-wa:
   config:
     id: wa
@@ -395,10 +401,7 @@ connector-launceston:
     id: launceston
     name: City of Launceston Open Data
     sourceUrl: https://opendata.launceston.tas.gov.au/api/feed/dcat-us/1.1.json
-    schedule: 0 3 */3 * *
-
-  
-      
+    schedule: 0 3 */3 * *    
       
       ## CKAN-only: Only get datasets that match this organisation name - you can only have one due to limitations
       ## in the CKAN API, if you need multiple organisations make multiple connectors.

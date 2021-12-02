@@ -126,6 +126,13 @@ dependencies:
       - connectors
       - connector-logan
   - name: magda-project-open-data-connector
+    version: "0.0.57-0"
+    alias: connector-melbournewater
+    repository: https://charts.magda.io
+    tags:
+      - connectors
+      - connector-melbournewater
+  - name: magda-project-open-data-connector
     version: 0.0.57-0
     alias: connector-melbourne
     repository: https://charts.magda.io
