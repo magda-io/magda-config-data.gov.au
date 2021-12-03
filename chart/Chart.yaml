@@ -104,13 +104,6 @@ dependencies:
     tags:
       - connectors
       - connector-environment
-  - name: magda-project-open-data-connector
-    version: 0.0.57-0
-    alias: connector-esta
-    repository: https://charts.magda.io
-    tags:
-      - connectors
-      - connector-esta
   - name: magda-csw-connector
     version: 0.0.57-0
     alias: connector-ga
