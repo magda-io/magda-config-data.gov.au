@@ -56,10 +56,6 @@ global:
   ## Default log level to use across the project. Currently this only affects scala-based
   ## services
   # logLevel: INFO
-
-  ## Whether to disable database authentication - useful in development, a very very bad
-  ## idea in production
-  # noDbAuth: false
   
   ## Whether to give the pods priority classes - these ensure that essential pods like
   ## ElasticSearch, Databases and the Gateway are schedules ahead of less essential pods
