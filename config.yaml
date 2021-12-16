@@ -252,7 +252,7 @@ connector-melbournewater:
   config:
     id: melbournewater
     name: Melbourne Water Corporation
-    sourceUrl: https://data-melbournewater.opendata.arcgis.com/data.json
+    sourceUrl: https://data-melbournewater.opendata.arcgis.com/api/feed/dcat-us/1.1.json
     schedule: "30 4 */3 * *"
 
 connector-melbourne:
