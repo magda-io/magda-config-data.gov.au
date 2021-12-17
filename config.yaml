@@ -597,14 +597,15 @@ magda:
       autoscaler:
         enabled: true
         minReplicas: 2
-        maxReplicas: 3
+        maxReplicas: 5
 
       resources:
         requests:
           cpu: 150m
-          memory: 20Mi
-        limits:
-          cpu: 300m
+          memory: 50Mi
+
+      image:
+        tag: 1.11
 
       ## The cloud sql instance to connect to
       instanceConnectionName: terriajs:australia-southeast1:dga-magda-prod-postgres-13
