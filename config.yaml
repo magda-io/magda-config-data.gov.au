@@ -470,7 +470,7 @@ magda:
         cpu: 50m
         memory: 100Mi
       limits:
-        cpu: 50m
+        cpu: 150m
         memory: 500Mi
 
   ## Settings for the linked data rating minion, which determines a rating for a dataset
@@ -596,14 +596,15 @@ magda:
       autoscaler:
         enabled: true
         minReplicas: 2
-        maxReplicas: 3
+        maxReplicas: 5
 
       resources:
         requests:
           cpu: 150m
-          memory: 20Mi
-        limits:
-          cpu: 300m
+          memory: 50Mi
+
+      image:
+        tag: 1.11
 
       ## The cloud sql instance to connect to
       instanceConnectionName: terriajs:australia-southeast1:magda-staging-2
