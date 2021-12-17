@@ -1017,7 +1017,7 @@ magda:
       fallbackUrl: "https://data.gov.au/data/"
 
       openInExternalTerriaMapButtonText: "Open in NationalMap"
-      openInExternalTerriaMapTargetUrl: "https://beta.nationalmap.terria.io/"
+      openInExternalTerriaMapTargetUrl: "https://nationalmap.gov.au/"
       supportExternalTerriaMapV7: false
 
       showContactButtonForNoContactPointDataset: false
