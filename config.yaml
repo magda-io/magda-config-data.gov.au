@@ -647,7 +647,7 @@ magda:
 
       ## The default recipient to email when there's no other choice - e.g. when asking a
       ## question about a dataset for which there's no organisational email
-      defaultRecipient: "data@digital.gov.au"
+      defaultRecipient: "support@data.gov.au"
 
       ## The hostname of the SMTP server to use - the password should be in a secret
       smtpHostname: "smtp.mailgun.org"
@@ -1000,7 +1000,7 @@ magda:
         minReplicas: 2
         maxReplicas: 5
       
-      defaultContactEmail: "data@digital.gov.au"
+      defaultContactEmail: "support@data.gov.au"
 
       featureFlags:
         cataloguing: false
