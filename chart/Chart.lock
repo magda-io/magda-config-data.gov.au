@@ -1,7 +1,7 @@
 dependencies:
 - name: magda
   repository: https://charts.magda.io
-  version: 1.1.0-rc.1
+  version: 1.2.0-rc.0
 - name: ingress
   repository: file://../ingress
   version: 1.1.0
@@ -107,5 +107,5 @@ dependencies:
 - name: magda-project-open-data-connector
   repository: https://charts.magda.io
   version: 1.1.0
-digest: sha256:79b6bd8eb265af741359dc3b4dd5ec7b76973215fe48caa5792e23c5e7b46473
-generated: "2021-12-17T14:55:03.895736+11:00"
+digest: sha256:093a12616dd345d60f6ea146878ee8f0d8c643f95742cfcadfd0efde4bcb974a
+generated: "2022-02-14T17:01:17.507942+11:00"

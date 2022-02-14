@@ -16,6 +16,12 @@ helm upgrade magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## v1.2.0
+
+v1.2.0 comes with Elasticsearch upgrade.
+
+More upgrade / migration info can be found from: [here](https://github.com/magda-io/magda/blob/master/docs/docs/migration/1.2.0.md)
+
 ## v1.1.0
 
 v1.1.0 requires upgrading Google Cloud SQL to postgreSQL 13. We used Google DMS for this job.
