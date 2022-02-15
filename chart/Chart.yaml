@@ -16,10 +16,6 @@ dependencies:
     version: "1.2.3"
     repository: https://charts.magda.io
 
-  - name: magda-auth-ckan
-    version: "1.2.3"
-    repository: https://charts.magda.io
-
   ## Data.gov.au connector to provide some initial data. Remove this if you
   ## don't want any data.gov.au connector
   - name: magda-ckan-connector
