@@ -746,8 +746,6 @@ magda:
         maxReplicas: 5
 
       authPlugins:
-      - key: ckan
-        baseUrl: http://magda-auth-ckan
       - key: internal
         baseUrl: http://magda-auth-internal
         
@@ -1079,9 +1077,6 @@ magda:
         minReplicas: 2
         ## The maximum number of replicas to have
         maxReplicas: 5
-
-magda-auth-ckan:
-  ckanUrl: "https://data.gov.au/data"
 
 magda-auth-internal:
   authPluginConfig:
