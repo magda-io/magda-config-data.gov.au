@@ -277,14 +277,6 @@ connector-moretonbay:
     sourceUrl: https://datahub.moretonbay.qld.gov.au/api/feed/dcat-us/1.1.json
     schedule: 0 7 */3 * *
 
-connector-neii:
-  config:
-    id: neii
-    name: National Environmental Information Infrastructure
-    sourceUrl: http://neii.bom.gov.au/services/catalogue/csw
-    pageSize: 100
-    schedule: 30 7 */3 * *
-
 connector-nsw:
   config:
     id: nsw
