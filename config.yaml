@@ -390,6 +390,14 @@ connector-launceston:
     name: City of Launceston Open Data
     sourceUrl: https://opendata.launceston.tas.gov.au/api/feed/dcat-us/1.1.json
     schedule: 0 3 */3 * *    
+
+
+connector-bundaberg:
+  config:
+    id: bundaberg
+    name: Bundaberg Regional Council
+    sourceUrl: https://opendata-bundabergrc.hub.arcgis.com/api/feed/dcat-us/1.1.json
+    schedule: 30 13 * * *
       
       ## CKAN-only: Only get datasets that match this organisation name - you can only have one due to limitations
       ## in the CKAN API, if you need multiple organisations make multiple connectors.
