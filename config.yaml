@@ -398,6 +398,13 @@ connector-bundaberg:
     name: Bundaberg Regional Council
     sourceUrl: https://opendata-bundabergrc.hub.arcgis.com/api/feed/dcat-us/1.1.json
     schedule: 30 13 * * *
+    presetRecordAspects:
+    - id: organization-details
+      recordType: Organization
+      opType: MERGE_RIGHT
+      data: 
+        title: "Bundaberg Regional Council"
+        jurisdiction: "Queensland Government"
       
       ## CKAN-only: Only get datasets that match this organisation name - you can only have one due to limitations
       ## in the CKAN API, if you need multiple organisations make multiple connectors.
