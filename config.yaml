@@ -405,6 +405,11 @@ connector-bundaberg:
       data: 
         title: "Bundaberg Regional Council"
         jurisdiction: "Queensland Government"
+    - id: dcat-dataset-strings
+      recordType: Dataset
+      opType: MERGE_RIGHT
+      data: 
+        publisher: "Bundaberg Regional Council"
       
       ## CKAN-only: Only get datasets that match this organisation name - you can only have one due to limitations
       ## in the CKAN API, if you need multiple organisations make multiple connectors.
