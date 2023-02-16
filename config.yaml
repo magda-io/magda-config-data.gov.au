@@ -615,8 +615,9 @@ magda:
           cpu: 150m
           memory: 50Mi
 
+      logDebugStdout: true
       image:
-        tag: 1.11
+        tag: "1.33.2-alpine"
 
       ## The cloud sql instance to connect to
       instanceConnectionName: terriajs:australia-southeast1:dga-magda-staging-postgres-13
