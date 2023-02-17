@@ -16,6 +16,12 @@ helm upgrade magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## v2.2.2
+
+This upgrade includes dataset indice version bump, which will trigger a full reindex.
+To prevent users from partial result & minimise the downtime, you can set `.Values.datasetsIndexVersion` to previous version `48` until reindex is completed.
+
+
 ## v1.2.0
 
 v1.2.0 comes with Elasticsearch upgrade.
