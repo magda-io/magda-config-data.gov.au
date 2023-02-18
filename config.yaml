@@ -582,7 +582,7 @@ magda:
 
     ## Settings for the authorization-api, which determines what each user's permissions are:
     authorization-api:
-      replicas: 2
+      replicas: 3
       resources:
         requests:
           cpu: 100m
@@ -595,7 +595,7 @@ magda:
         ## whether to enable autoscaling
         enabled: true
         ## The minimum number of replicas to have
-        minReplicas: 2
+        minReplicas: 3
         ## The maximum number of replicas to have
         maxReplicas: 8
 
@@ -745,7 +745,7 @@ magda:
       ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
       ckanRedirectionDomain: "data.gov.au"
       ckanRedirectionPath: "/data"
-      enableCkanRedirection: true
+      enableCkanRedirection: false
 
       replicas: 2
 
@@ -1011,6 +1011,8 @@ magda:
         maxReplicas: 5
       
       defaultContactEmail: "support@data.gov.au"
+
+      registryApiBaseUrlInternal: "http://registry-api-read-only/v0"
 
       featureFlags:
         cataloguing: false
