@@ -248,3 +248,11 @@ dependencies:
     tags:
       - connectors
       - connector-bundaberg
+
+  - name: magda-ckan-connector
+    version: "2.0.0"
+    alias: connector-ditrdca
+    repository: "oci://ghcr.io/magda-io/charts"
+    tags:
+      - connectors
+      - connector-ditrdca

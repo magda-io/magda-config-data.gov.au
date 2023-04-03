@@ -391,6 +391,14 @@ connector-launceston:
     sourceUrl: https://opendata.launceston.tas.gov.au/api/feed/dcat-us/1.1.json
     schedule: 0 3 */3 * *    
 
+connector-ditrdca:
+  config:
+    id: ditrdca
+    name: Department of infrastructure
+    sourceUrl: https://catalogue.data.infrastructure.gov.au/
+    pageSize: 25
+    ignoreHarvestSources: ["No"]
+    schedule: 55 13 * * *
 
 connector-bundaberg:
   config:
