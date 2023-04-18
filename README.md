@@ -9,12 +9,17 @@ Keep in mind that Data.gov.au uses a number of services that exist outside Kuber
 helm repo update
 # download helm charts dependencies 
 helm dep up ./chart
-helm upgrade magda ./chart --timeout 30000s --install -f config.yaml
+helm upgrade -n dga-prod magda ./chart --timeout 30000s --install -f config.yaml
 ```
 
 > Magda version should be specified in deploy chart [Chart.yaml](./chart/Chart.yaml) dependencies section.
 
 # Upgrade Guide:
+
+## v2.2.3
+
+Minor upgrade
+
 
 ## v2.2.2
 

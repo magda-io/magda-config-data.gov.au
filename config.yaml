@@ -624,10 +624,6 @@ magda:
           cpu: 150m
           memory: 50Mi
 
-      logDebugStdout: true
-      image:
-        tag: "1.33.2-alpine"
-
       ## The cloud sql instance to connect to
       instanceConnectionName: terriajs:australia-southeast1:dga-magda-prod-new
 
@@ -753,7 +749,7 @@ magda:
       ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
       ckanRedirectionDomain: "data.gov.au"
       ckanRedirectionPath: "/data"
-      enableCkanRedirection: false
+      enableCkanRedirection: true
 
       replicas: 2
 
@@ -1020,8 +1016,6 @@ magda:
       
       defaultContactEmail: "support@data.gov.au"
 
-      registryApiBaseUrlInternal: "http://registry-api-read-only/v0"
-
       featureFlags:
         cataloguing: false
         publishToDga: false
@@ -1080,25 +1074,6 @@ magda:
           memory: 50Mi
         limits:
           cpu: 50m
-
-    opa:
-      replicas: 2
-
-      resources:
-        requests:
-          cpu: 200m
-          memory: 50Mi
-        limits:
-          cpu: 500m
-
-      ## Configure the autoscaler
-      autoscaler:
-        ## whether to enable autoscaling
-        enabled: true
-        ## The minimum number of replicas to have
-        minReplicas: 2
-        ## The maximum number of replicas to have
-        maxReplicas: 5
 
 magda-auth-internal:
   authPluginConfig:
