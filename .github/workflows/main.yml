@@ -9,7 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Lint Helm Chart Dependencies
+      - name: Download Helm Chart Dependencies
+        run: |
+          helm dep up ./chart
+
+      - name: Lint Helm Chart
         run: |
           echo "test prod config..."
           helm template ./chart -f ./config.yaml 1>/dev/null

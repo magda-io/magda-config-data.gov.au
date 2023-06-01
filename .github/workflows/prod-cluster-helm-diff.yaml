@@ -63,6 +63,7 @@ jobs:
           else
               export HELM_DEPLOYMENT_SWITCH_DEBUG=""
           fi
+          helm dep up ./chart
           helm diff upgrade ${HELM_DEPLOYMENT_SWITCH_DEBUG} \
             --install \
             --namespace ${DEPLOY_NAMESPACE} \
