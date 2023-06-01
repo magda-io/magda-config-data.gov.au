@@ -780,7 +780,7 @@ magda:
           - "'unsafe-inline'" # still being used by rollbar
           - browser-update.org
           - platform.twitter.com
-          - www.googletagmanager.com
+          - https://*.googletagmanager.com
           - www.google-analytics.com
           - rum-static.pingdom.net
           - https://tagmanager.google.com/debug
@@ -1042,6 +1042,7 @@ magda:
       gapiIds:
         - "UA-92539508-1"
         - "UA-38578922-1"
+        - "G-GJMPKX4B05"
 
       resources:
         requests:
