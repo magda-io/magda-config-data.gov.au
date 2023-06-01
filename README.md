@@ -16,6 +16,10 @@ helm upgrade -n dga-prod magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## v2.2.4
+
+also upgrade csw-connector to v2.0.2
+
 ## v2.2.3
 
 Minor upgrade
