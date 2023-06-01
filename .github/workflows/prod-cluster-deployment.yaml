@@ -1,6 +1,6 @@
-name: PROD Cluster helm diff
+name: PROD Cluster deployment
 
-run-name: PROD Cluster helm diff on ${{ github.ref_name }}
+run-name: PROD Cluster deployment on ${{ github.ref_name }}
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ env:
   DEPLOY_CONFIG_FILE: "./config.yaml"
 
 jobs:
-  prod-cluster-helm-diff:
+  prod-cluster-deployment:
     runs-on: ubuntu-latest
     steps:          
       - uses: actions/checkout@v3
@@ -39,9 +39,6 @@ jobs:
 
           sudo apt-get update -y
           sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
-
-      - name: Install Helm diff
-        run: helm plugin install https://github.com/databus23/helm-diff
 
       - name: Login to GAR & Cluster
         run: |
@@ -57,7 +54,7 @@ jobs:
         run: |
           helm dep up ./chart
 
-      - name: Generating Helm Diff Info
+      - name: Deployment
         env:
           DEPLOYMENT_DEBUG: ${{ inputs.debug }}
         run: |
@@ -67,9 +64,10 @@ jobs:
           else
               export HELM_DEPLOYMENT_SWITCH_DEBUG=""
           fi
-          helm diff upgrade ${HELM_DEPLOYMENT_SWITCH_DEBUG} \
+          helm upgrade ${HELM_DEPLOYMENT_SWITCH_DEBUG} \
             --install \
             --namespace ${DEPLOY_NAMESPACE} \
+            --timeout 1200s\
             ${RELEASE_NAME} \
             ${DEPLOY_CHART} \
             -f ${DEPLOY_CONFIG_FILE}
