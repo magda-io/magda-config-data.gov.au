@@ -465,11 +465,11 @@ magda:
       csp:
         directives:
           scriptSrc:
-          - "''self''"
-          - "''unsafe-inline''"
+          - "'self'"
+          - "'unsafe-inline'"
           - browser-update.org
           objectSrc:
-          - "''none''"
+          - "'none'"
 
       ## Configures helmet.js - config will be converted to JSON and passed to
       ## https://github.com/helmetjs/helmet

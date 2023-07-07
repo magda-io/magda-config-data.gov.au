@@ -1043,8 +1043,6 @@ magda:
       discourseIntegrationDistributionPage: false
 
       gapiIds:
-        - "UA-92539508-1"
-        - "UA-38578922-1"
         - "G-GJMPKX4B05"
         - "G-HBK27ZCMW9"
 
