@@ -1,11 +1,11 @@
 apiVersion: v2
 name: "magda-config"
 description: "DGA magda deployment chart"
-version: "2.2.6"
+version: "2.2.4"
 kubeVersion: ">= 1.16.0-0"
 dependencies:
   - name: magda
-    version: "2.2.6"
+    version: "2.2.4"
     repository: "oci://ghcr.io/magda-io/charts"
 
   - name: ingress
