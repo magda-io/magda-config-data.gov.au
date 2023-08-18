@@ -226,14 +226,6 @@ connector-marlin:
     pageSize: 50
     schedule: 30 3 */3 * *
 
-connector-environment:
-  config:
-    id: environment
-    name: Department of the Environment and Energy
-    sourceUrl: http://www.environment.gov.au/fed/csw
-    pageSize: 100
-    schedule: 30 13 */3 * *
-
 connector-ga:
   config:
     id: ga
@@ -402,6 +394,13 @@ connector-ditrdca:
     pageSize: 25
     ignoreHarvestSources: ["No"]
     schedule: 55 13 * * *
+
+connector-dcceew:
+  config:
+    id: dcceew
+    name: "Department of Climate Change, Energy, the Environment and Water"
+    sourceUrl: https://fed.dcceew.gov.au/api/feed/dcat-us/1.1.json
+    schedule: 10 13 * * 6
 
 connector-bundaberg:
   config:
