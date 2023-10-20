@@ -16,6 +16,11 @@ helm upgrade -n dga-prod magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## v2.3.2
+
+This upgrade includes dataset indice version bump, which will trigger a full reindex.
+To prevent users from partial result & minimise the downtime, you can set `.Values.datasetsIndexVersion` to previous version `49` until reindex is completed.
+
 ## v2.2.4
 
 also upgrade csw-connector to v2.0.2
