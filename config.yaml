@@ -342,6 +342,12 @@ connector-wa:
     sourceUrl: https://catalogue.data.wa.gov.au/
     pageSize: 25
     schedule: 55 * * * *
+    customJsFilterCode: |
+      if(type === "Dataset") {
+        return jsonData["access_level"]=="open" ? true : false;
+      } else {
+        return true;
+      }
 
 connector-dap:
   config:
@@ -764,9 +770,9 @@ magda:
         ## The maximum number of replicas to have
         maxReplicas: 5
 
-      authPlugins:
-      - key: internal
-        baseUrl: http://magda-auth-internal
+      # authPlugins:
+      # - key: internal
+      #   baseUrl: http://magda-auth-internal
         
       ## If you want to use the Australian Department of Industry's VANguard service, put the details here:
       # vanguardWsFedIdpUrl: https://authentication.business.gov.au/fas/v2/wsfed12/authenticate
@@ -993,6 +999,8 @@ magda:
           memory: 600Mi
         limits:
           cpu: 500m
+      # temp put index to 49 until version 50 index is ready
+      datasetsIndexVersion: 49
 
       ## Configure the autoscaler
       autoscaler:
@@ -1077,6 +1085,6 @@ magda:
         limits:
           cpu: 50m
 
-magda-auth-internal:
-  authPluginConfig:
-    loginFormExtraInfoContent: "Please contact system admin for account issues"
+# magda-auth-internal:
+#   authPluginConfig:
+#     loginFormExtraInfoContent: "Please contact system admin for account issues"

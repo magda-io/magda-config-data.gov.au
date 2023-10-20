@@ -1,25 +1,25 @@
 apiVersion: v2
 name: "magda-config"
 description: "DGA magda deployment chart"
-version: "2.2.4"
+version: "2.3.2"
 kubeVersion: ">= 1.16.0-0"
 dependencies:
   - name: magda
-    version: "2.2.4"
+    version: "2.3.2"
     repository: "oci://ghcr.io/magda-io/charts"
 
   - name: ingress
     version: "1.1.0"
     repository: file://../ingress
 
-  - name: magda-auth-internal
-    version: "2.0.0"
-    repository: "oci://ghcr.io/magda-io/charts"
+  # - name: magda-auth-internal
+  #   version: "2.0.0"
+  #   repository: "oci://ghcr.io/magda-io/charts"
 
   ## Data.gov.au connector to provide some initial data. Remove this if you
   ## don't want any data.gov.au connector
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-dga
     repository: "oci://ghcr.io/magda-io/charts"
     tags:
@@ -66,14 +66,14 @@ dependencies:
       - connectors
       - connector-bom
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-aurin
     repository: "oci://ghcr.io/magda-io/charts"
     tags:
       - connectors
       - connector-aurin
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-brisbane
     repository: "oci://ghcr.io/magda-io/charts"
     tags:
@@ -136,7 +136,7 @@ dependencies:
       - connectors
       - connector-moretonbay
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-nsw
     repository: "oci://ghcr.io/magda-io/charts"
     tags:
@@ -150,14 +150,14 @@ dependencies:
       - connectors
       - connector-sdinsw
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-qld
     repository: "oci://ghcr.io/magda-io/charts"
     tags:
       - connectors
       - connector-qld
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-sa
     repository: "oci://ghcr.io/magda-io/charts"
     tags:
@@ -178,14 +178,14 @@ dependencies:
       - connectors
       - connector-tern
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-vic
     repository: "oci://ghcr.io/magda-io/charts"
     tags:
       - connectors
       - connector-vic
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-wa
     repository: "oci://ghcr.io/magda-io/charts"
     tags:
@@ -243,7 +243,7 @@ dependencies:
       - connector-bundaberg
 
   - name: magda-ckan-connector
-    version: "2.0.0"
+    version: "2.1.0"
     alias: connector-ditrdca
     repository: "oci://ghcr.io/magda-io/charts"
     tags:

@@ -1,16 +1,13 @@
 dependencies:
 - name: magda
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.2.4
+  version: 2.3.2
 - name: ingress
   repository: file://../ingress
   version: 1.1.0
-- name: magda-auth-internal
-  repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-project-open-data-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.0
@@ -28,10 +25,10 @@ dependencies:
   version: 2.0.2
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-project-open-data-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.0
@@ -58,16 +55,16 @@ dependencies:
   version: 2.0.0
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-csw-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.2
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-csw-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.2
@@ -76,10 +73,10 @@ dependencies:
   version: 2.0.2
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-dap-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.0
@@ -103,9 +100,9 @@ dependencies:
   version: 2.0.0
 - name: magda-ckan-connector
   repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
+  version: 2.1.0
 - name: magda-project-open-data-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.0
-digest: sha256:5bb833e98f4c0b2d5fa39635983d93b6fde0a627780f5491acc5ceda80898492
-generated: "2023-08-18T17:28:22.41352+10:00"
+digest: sha256:95ac1243897908dd2087c239dae94450f7c4afec23381a0b19c87626dafc36a3
+generated: "2023-10-20T13:22:17.943211+11:00"
