@@ -999,8 +999,9 @@ magda:
           memory: 600Mi
         limits:
           cpu: 500m
-      # temp put index to 49 until version 50 index is ready
-      datasetsIndexVersion: 49
+      # set this only when you want to manually set the search-api's search index version
+      # e.g. when a new version is still being rebuilt.
+      # datasetsIndexVersion: 50
 
       ## Configure the autoscaler
       autoscaler:
