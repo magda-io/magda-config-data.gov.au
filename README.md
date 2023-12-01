@@ -16,6 +16,10 @@ helm upgrade -n dga-prod magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## v2.3.3
+
+Minor upgrade with improvements & bug fixes
+
 ## v2.3.2
 
 This upgrade includes dataset indice version bump, which will trigger a full reindex.
