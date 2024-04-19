@@ -16,6 +16,10 @@ helm upgrade -n dga-prod magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## v3.0.1
+
+Upgrades with improvements & bug fixes
+
 ## v2.3.3
 
 Minor upgrade with improvements & bug fixes

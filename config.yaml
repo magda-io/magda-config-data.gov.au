@@ -426,6 +426,13 @@ connector-bundaberg:
       opType: MERGE_RIGHT
       data: 
         publisher: "Bundaberg Regional Council"
+
+connector-redland:
+  config:
+    id: redland
+    name: "Redland City Council"
+    sourceUrl: https://opendata.redland.qld.gov.au/api/feed/dcat-us/1.1.json
+    schedule: 10 12 * * 6
       
       ## CKAN-only: Only get datasets that match this organisation name - you can only have one due to limitations
       ## in the CKAN API, if you need multiple organisations make multiple connectors.

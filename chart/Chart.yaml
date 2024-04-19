@@ -257,3 +257,11 @@ dependencies:
     tags:
       - connectors
       - connector-dcceew
+
+  - name: magda-project-open-data-connector
+    version: "2.0.0"
+    alias: connector-redland
+    repository: "oci://ghcr.io/magda-io/charts"
+    tags:
+      - connectors
+      - connector-redland
