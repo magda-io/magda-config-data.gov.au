@@ -608,7 +608,7 @@ magda:
       replicas: 3
       resources:
         requests:
-          cpu: 100m
+          cpu: 200m
           memory: 75Mi
         limits:
           cpu: 300m
@@ -618,7 +618,7 @@ magda:
         ## whether to enable autoscaling
         enabled: true
         ## The minimum number of replicas to have
-        minReplicas: 3
+        minReplicas: 4
         ## The maximum number of replicas to have
         maxReplicas: 8
 
@@ -938,9 +938,9 @@ magda:
         ## whether to enable autoscaling
         enabled: true
         ## The minimum number of replicas to have
-        minReplicas: 2
+        minReplicas: 4
         ## The maximum number of replicas to have
-        maxReplicas: 5
+        maxReplicas: 7
 
       ## The registry api is able to be split into two kinds of deployments: full, which does everything
       ## but can only ever run one pod at a time, and read-only, which can only do read-only requests but
