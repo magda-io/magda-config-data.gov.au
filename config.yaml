@@ -182,6 +182,8 @@ connector-aodn:
     id: aodn
     name: Australian Oceans Data Network
     sourceUrl: https://catalogue.aodn.org.au/geonetwork/srv/eng/csw
+    outputSchema: http://standards.iso.org/iso/19115/-3/mdb/2.0
+    typeNames: mdb:MD_Metadata
     pageSize: 100
     schedule: 30 1 */3 * *
 
@@ -224,20 +226,13 @@ connector-marlin:
     pageSize: 50
     schedule: 30 3 */3 * *
 
-connector-environment:
-  config:
-    id: environment
-    name: Department of the Environment and Energy
-    sourceUrl: http://www.environment.gov.au/fed/csw
-    pageSize: 100
-    schedule: 30 13 */3 * *
-
 connector-ga:
   config:
     id: ga
     name: Geoscience Australia
     sourceUrl: https://ecat.ga.gov.au/geonetwork/srv/eng/csw
     outputSchema: http://standards.iso.org/iso/19115/-3/mdb/1.0
+    typeNames: mdb:MD_Metadata
     pageSize: 100
     schedule: 0 5 */3 * *
 
@@ -347,6 +342,12 @@ connector-wa:
     sourceUrl: https://catalogue.data.wa.gov.au/
     pageSize: 25
     schedule: 55 * * * *
+    customJsFilterCode: |
+      if(type === "Dataset") {
+        return jsonData["access_level"]=="open" ? true : false;
+      } else {
+        return true;
+      }
 
 connector-dap:
   config:
@@ -391,6 +392,21 @@ connector-launceston:
     sourceUrl: https://opendata.launceston.tas.gov.au/api/feed/dcat-us/1.1.json
     schedule: 0 3 */3 * *    
 
+connector-ditrdca:
+  config:
+    id: ditrdca
+    name: Department of infrastructure
+    sourceUrl: https://catalogue.data.infrastructure.gov.au/
+    pageSize: 25
+    ignoreHarvestSources: ["No"]
+    schedule: 55 13 * * *
+
+connector-dcceew:
+  config:
+    id: dcceew
+    name: "Department of Climate Change, Energy, the Environment and Water"
+    sourceUrl: https://fed.dcceew.gov.au/api/feed/dcat-us/1.1.json
+    schedule: 10 13 * * 6
 
 connector-bundaberg:
   config:
@@ -410,6 +426,13 @@ connector-bundaberg:
       opType: MERGE_RIGHT
       data: 
         publisher: "Bundaberg Regional Council"
+
+connector-redland:
+  config:
+    id: redland
+    name: "Redland City Council"
+    sourceUrl: https://opendata.redland.qld.gov.au/api/feed/dcat-us/1.1.json
+    schedule: 10 12 * * 6
       
       ## CKAN-only: Only get datasets that match this organisation name - you can only have one due to limitations
       ## in the CKAN API, if you need multiple organisations make multiple connectors.
@@ -615,12 +638,8 @@ magda:
           cpu: 150m
           memory: 50Mi
 
-      logDebugStdout: true
-      image:
-        tag: "1.33.2-alpine"
-
       ## The cloud sql instance to connect to
-      instanceConnectionName: terriajs:australia-southeast1:dga-magda-staging-postgres-13
+      instanceConnectionName: terriajs:australia-southeast1:dga-magda-test-migration
 
     ## A pod that combines all the databases if global.useCombinedDb is set to true
     # combined-db:
@@ -777,7 +796,7 @@ magda:
           - "'unsafe-inline'" # still being used by rollbar
           - browser-update.org
           - platform.twitter.com
-          - www.googletagmanager.com
+          - https://*.googletagmanager.com
           - www.google-analytics.com
           - rum-static.pingdom.net
           - https://tagmanager.google.com/debug
@@ -788,7 +807,6 @@ magda:
           - sentry.cloud.gov.au
           objectSrc:
           - "'none'"
-          reportUri: "https://sentry.cloud.gov.au/api/3/security/?sentry_key=af6f917c068e4756837fca7c2f5adf17e"
 
       ## Configures helmet.js - config will be converted to JSON and passed to
       ## https://github.com/helmetjs/helmet
@@ -988,6 +1006,9 @@ magda:
           memory: 600Mi
         limits:
           cpu: 500m
+      # set this only when you want to manually set the search-api's search index version
+      # e.g. when a new version is still being rebuilt.
+      # datasetsIndexVersion: 50
 
       ## Configure the autoscaler
       autoscaler:
@@ -1037,8 +1058,7 @@ magda:
       discourseIntegrationDistributionPage: false
 
       gapiIds:
-        - "UA-92539508-1"
-        - "UA-38578922-1"
+        - "G-M0B9MLW1QB"
 
       resources:
         requests:
@@ -1071,25 +1091,6 @@ magda:
           memory: 50Mi
         limits:
           cpu: 50m
-
-    opa:
-      replicas: 2
-
-      resources:
-        requests:
-          cpu: 200m
-          memory: 50Mi
-        limits:
-          cpu: 500m
-
-      ## Configure the autoscaler
-      autoscaler:
-        ## whether to enable autoscaling
-        enabled: true
-        ## The minimum number of replicas to have
-        minReplicas: 2
-        ## The maximum number of replicas to have
-        maxReplicas: 5
 
 magda-auth-internal:
   authPluginConfig:

@@ -9,12 +9,40 @@ Keep in mind that Data.gov.au uses a number of services that exist outside Kuber
 helm repo update
 # download helm charts dependencies 
 helm dep up ./chart
-helm upgrade magda ./chart --timeout 30000s --install -f config.yaml
+helm upgrade -n dga-prod magda ./chart --timeout 30000s --install -f config.yaml
 ```
 
 > Magda version should be specified in deploy chart [Chart.yaml](./chart/Chart.yaml) dependencies section.
 
 # Upgrade Guide:
+
+## v3.0.1
+
+Upgrades with improvements & bug fixes
+
+## v2.3.3
+
+Minor upgrade with improvements & bug fixes
+
+## v2.3.2
+
+This upgrade includes dataset indice version bump, which will trigger a full reindex.
+To prevent users from partial result & minimise the downtime, you can set `.Values.datasetsIndexVersion` to previous version `49` until reindex is completed.
+
+## v2.2.4
+
+also upgrade csw-connector to v2.0.2
+
+## v2.2.3
+
+Minor upgrade
+
+
+## v2.2.2
+
+This upgrade includes dataset indice version bump, which will trigger a full reindex.
+To prevent users from partial result & minimise the downtime, you can set `.Values.datasetsIndexVersion` to previous version `48` until reindex is completed.
+
 
 ## v1.2.0
 

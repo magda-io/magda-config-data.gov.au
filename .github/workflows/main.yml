@@ -1,0 +1,20 @@
+name: Main CI Workflow
+
+on: push
+
+jobs:
+  build-test-helm-chart:
+    name: Build, Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download Helm Chart Dependencies
+        run: |
+          helm dep up ./chart
+
+      - name: Lint Helm Chart
+        run: |
+          echo "test prod config..."
+          helm template ./chart -f ./config.yaml 1>/dev/null
+          echo "test prod config done."
