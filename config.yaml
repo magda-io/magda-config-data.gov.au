@@ -708,6 +708,7 @@ magda:
             memory: 1000Mi
           limits:
             cpu: 250m
+            memory: 1000Mi
       client:
         javaOpts: "-Xmx1000M -Xms1000M"
         enabled: true
@@ -718,6 +719,7 @@ magda:
             memory: 1500Mi
           limits:
             cpu: 250m
+            memory: 1500Mi
       data:
         replicas: 2
         enabled: true
@@ -729,6 +731,7 @@ magda:
             memory: 5000Mi
           limits:
             cpu: 1900m
+            memory: 5000Mi
 
     ## The elasticsearch setup - this can consist of up to three different kinds of pods -
     ## data nodes, master nodes and client nodes.
