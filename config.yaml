@@ -734,61 +734,6 @@ magda:
             cpu: 1900m
             memory: 5000Mi
 
-    ## The elasticsearch setup - this can consist of up to three different kinds of pods -
-    ## data nodes, master nodes and client nodes.
-    elasticsearch:
-      image:
-        tag: "3.0.1"
-      ## Whether to use client and master nodes, or just use data nodes.
-      production: true
-
-      ## All three kinds of nodes can be customised with these settings like so:
-      # nodetype:
-        ## The java heap size - this should be half the total memory request
-        # heapSize: 3000m
-        ## Elasticsearch plugins to install
-        # pluginsInstall: "repository-gcs"
-
-      ## Settings for the data nodes - this is a statefulset that actually holds the data,
-      ## and is the only kind of node that's strictly necessary. You can have multiple
-      ## replicas of these, they will discover each other and balance shards and replicas
-      ## between them.
-      data:
-        heapSize: 3000m
-        storage: 200Gi
-        # pluginsInstall: "repository-gcs" disabled until es backups are readded
-        storageClass: "fast-ssd"
-        resources:
-          requests:
-            cpu: 500m
-            memory: 5000Mi
-          limits:
-            cpu: 1900m
-
-      ## Settings for the client nodes - this accepts HTTP connections from search-api and
-      ## indexer and forwards them to the data nodes.
-      client:
-        replicas: 2
-        heapSize: 900m
-        # pluginsInstall: "repository-gcs" disabled until es backups are readded
-        resources:
-          requests:
-            cpu: 50m
-            memory: 1500Mi
-          limits:
-            cpu: 250m
-
-      ## Settings for the master nodes - these keep track of the data nodes as they go up
-      ## and down and keep track of what the current state of the data should be.
-      master:
-        # pluginsInstall: "repository-gcs" disabled until es backups are readded
-        resources:
-          requests:
-            cpu: 25m
-            memory: 1000Mi
-          limits:
-            cpu: 250m
-
     ## The gateway accepts incoming connections and directs them to the appropriate api pod,
     ## or the web server pod
     gateway:
