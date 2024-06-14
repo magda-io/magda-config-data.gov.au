@@ -14,10 +14,5 @@ spec:
     solvers:
     # ACME DNS-01 provider configurations
     - dns01:
-        route53:
-          region: "ap-southeast-2"
-          hostedZoneID: {{ .Values.hostedZoneID | quote }}
-          accessKeyID: {{ .Values.accessKeyID | quote }}
-          secretAccessKeySecretRef:
-            name: {{ .Values.secretAccessKeySecretRef.name | quote }}
-            key: {{ .Values.secretAccessKeySecretRef.key | quote }}
+        cloudDNS:
+          project: "terriajs"

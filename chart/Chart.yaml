@@ -1,11 +1,11 @@
 apiVersion: v2
 name: "magda-config"
 description: "DGA magda deployment chart"
-version: "3.0.1"
+version: "4.0.0"
 kubeVersion: ">= 1.16.0-0"
 dependencies:
   - name: magda
-    version: "3.0.1"
+    version: "4.0.0"
     repository: "oci://ghcr.io/magda-io/charts"
 
   - name: ingress
@@ -72,13 +72,14 @@ dependencies:
     tags:
       - connectors
       - connector-aurin
-  - name: magda-ckan-connector
-    version: "2.1.0"
-    alias: connector-brisbane
-    repository: "oci://ghcr.io/magda-io/charts"
-    tags:
-      - connectors
-      - connector-brisbane
+  # disable for now as brisbane city council has changed their system to opendatasoft
+  # - name: magda-ckan-connector
+  #   version: "2.1.0"
+  #   alias: connector-brisbane
+  #   repository: "oci://ghcr.io/magda-io/charts"
+  #   tags:
+  #     - connectors
+  #     - connector-brisbane
   - name: magda-project-open-data-connector
     version: "2.0.0"
     alias: connector-hobart
