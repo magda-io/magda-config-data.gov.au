@@ -99,6 +99,8 @@ tags:
   content-api: true
   correspondence-api: true
   elasticsearch: true
+  opensearch: true
+  opensearch-dashboards: true
   gateway: true
   indexer: true
   preview-map: true
@@ -108,7 +110,6 @@ tags:
   session-db: true
   web-server: true
   connectors: true
-  opa: true
 
   ## Whether to use an ingress, which is necessary for HTTPS and using the Google CDN with
   ## Google Kubernetes Engine. By default this is off, and access is provided to the cluster
@@ -695,9 +696,47 @@ magda:
         limits:
           cpu: 50m
 
+    opensearch:
+      master:
+        enabled: true
+        javaOpts: "-Xmx512M -Xms512M"
+        replicas: 3
+        resources:
+          requests:
+            cpu: 25m
+            memory: 1000Mi
+          limits:
+            cpu: 250m
+            memory: 1000Mi
+      client:
+        javaOpts: "-Xmx1000M -Xms1000M"
+        enabled: true
+        replicas: 2
+        resources:
+          requests:
+            cpu: 50m
+            memory: 1500Mi
+          limits:
+            cpu: 250m
+            memory: 1500Mi
+      data:
+        replicas: 2
+        enabled: true
+        javaOpts: "-Xmx3000M -Xms3000M"
+        storage: 200Gi
+        resources:
+          requests:
+            cpu: 500m
+            memory: 5000Mi
+          limits:
+            cpu: 1900m
+            memory: 5000Mi
+
     ## The elasticsearch setup - this can consist of up to three different kinds of pods -
     ## data nodes, master nodes and client nodes.
     elasticsearch:
+      image:
+        tag: "3.0.1"
       ## Whether to use client and master nodes, or just use data nodes.
       production: true
 
@@ -843,6 +882,12 @@ magda:
 
     ## Configures the service that puts datasets and organisations into elasticsearch
     indexer:
+      # image:
+      #   tag: 3.0.2
+      # appConfig:
+      #   elasticSearch:
+      #     serverUrl: http://elasticsearch:9200
+      #     esInstanceSupport: true
       elasticsearch:
         ## How many shards and replicas to use when creating a new index. Generally, more
         ## shards mean that the index will be split among more data nodes, and more replicas
@@ -850,7 +895,7 @@ magda:
         ## In general you want a number of shards equal to the lowest number of data nodes
         ## possible, and a number of replicas equal to the highest number.
         shards: 2
-        replicas: 4
+        replicas: 1
       resources:
         requests:
           cpu: 100m
@@ -997,8 +1042,11 @@ magda:
 
     ## Configures the API that connects to ElasticSearch to perform searches.
     search-api:
-      # image:
-      #   tag: 0.0.55-RC1
+      image:
+        tag: 3.0.1
+      appConfig:
+        elasticSearch:
+        serverUrl: http://elasticsearch:9200
       replicas: 2
       resources:
         requests:
