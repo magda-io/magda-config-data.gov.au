@@ -204,13 +204,15 @@ connector-aurin:
     pageSize: 100
     schedule: 0 1 */3 * *
 
-connector-brisbane:
-  config:
-    id: brisbane
-    name: Brisbane City Council
-    sourceUrl: https://www.data.brisbane.qld.gov.au/data/
-    pageSize: 100
-    schedule: 10 * */1 * *
+# Brisbane City Council has switched to a system based on "opendatasoft"
+# disable the connector for now
+# connector-brisbane:
+#   config:
+#     id: brisbane
+#     name: Brisbane City Council
+#     sourceUrl: https://www.data.brisbane.qld.gov.au/data/
+#     pageSize: 100
+#     schedule: 10 * */1 * *
 
 connector-hobart:
   config:
