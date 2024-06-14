@@ -1046,7 +1046,7 @@ magda:
         tag: 3.0.1
       appConfig:
         elasticSearch:
-        serverUrl: http://elasticsearch:9200
+          serverUrl: http://elasticsearch:9200
       replicas: 2
       resources:
         requests:
