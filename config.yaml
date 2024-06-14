@@ -1042,11 +1042,11 @@ magda:
 
     ## Configures the API that connects to ElasticSearch to perform searches.
     search-api:
-      image:
-        tag: 3.0.1
-      appConfig:
-        elasticSearch:
-          serverUrl: http://elasticsearch:9200
+      # image:
+      #   tag: 3.0.1
+      # appConfig:
+      #   elasticSearch:
+      #     serverUrl: http://elasticsearch:9200
       replicas: 2
       resources:
         requests:
