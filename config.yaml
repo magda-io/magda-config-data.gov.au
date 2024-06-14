@@ -98,7 +98,7 @@ tags:
   content-db: true
   content-api: true
   correspondence-api: true
-  elasticsearch: true
+  elasticsearch: false
   opensearch: true
   opensearch-dashboards: true
   gateway: true
