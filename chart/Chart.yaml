@@ -1,11 +1,11 @@
 apiVersion: v2
 name: "magda-config"
 description: "DGA magda deployment chart"
-version: "4.0.0"
+version: "4.2.3"
 kubeVersion: ">= 1.16.0-0"
 dependencies:
   - name: magda
-    version: "4.0.0"
+    version: "4.2.3"
     repository: "oci://ghcr.io/magda-io/charts"
 
   - name: ingress
@@ -143,13 +143,14 @@ dependencies:
     tags:
       - connectors
       - connector-nsw
-  - name: magda-csw-connector
-    version: "2.0.2"
-    alias: connector-sdinsw
-    repository: "oci://ghcr.io/magda-io/charts"
-    tags:
-      - connectors
-      - connector-sdinsw
+  # provider server is not available
+  # - name: magda-csw-connector
+  #   version: "2.0.2"
+  #   alias: connector-sdinsw
+  #   repository: "oci://ghcr.io/magda-io/charts"
+  #   tags:
+  #     - connectors
+  #     - connector-sdinsw
   - name: magda-ckan-connector
     version: "2.1.0"
     alias: connector-qld

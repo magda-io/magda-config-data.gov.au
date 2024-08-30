@@ -225,7 +225,9 @@ connector-marlin:
   config:
     id: marlin
     name: CSIRO Marlin
-    sourceUrl: http://www.marlin.csiro.au/geonetwork/srv/eng/csw
+    sourceUrl: https://marlin.csiro.au/geonetwork/srv/eng/csw
+    outputSchema: http://standards.iso.org/iso/19115/-3/mdb/2.0
+    typeNames: mdb:MD_Metadata
     pageSize: 50
     schedule: 30 3 */3 * *
 
@@ -283,13 +285,14 @@ connector-nsw:
     pageSize: 100
     schedule: 20 * * * *
 
-connector-sdinsw:
-  config:
-    id: sdinsw
-    name: NSW Land and Property
-    sourceUrl: https://sdi.nsw.gov.au/csw
-    pageSize: 100
-    schedule: 0 9 */3 * *
+# provider server is not available
+# connector-sdinsw:
+#   config:
+#     id: sdinsw
+#     name: NSW Land and Property
+#     sourceUrl: https://sdi.nsw.gov.au/csw
+#     pageSize: 100
+#     schedule: 0 9 */3 * *
 
 connector-qld:
   config:
@@ -319,7 +322,9 @@ connector-tern:
   config:
     id: tern
     name: Terrestrial Ecosystem Research Network
-    sourceUrl: http://data.auscover.org.au/geonetwork/srv/eng/csw
+    sourceUrl: https://geonetwork.tern.org.au/geonetwork/srv/eng/csw
+    outputSchema: http://standards.iso.org/iso/19115/-3/mdb/2.0
+    typeNames: mdb:MD_Metadata
     pageSize: 100
     schedule: 0 11 */3 * *
 

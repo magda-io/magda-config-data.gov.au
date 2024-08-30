@@ -16,6 +16,12 @@ helm upgrade -n dga-prod magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## v4.2.3
+
+- Upgrade to Magda v4.2.3
+- Upgrade search engine to opensearch v2.15.0
+- Connector config adjustments
+
 ## v4.0.0
 
 - Upgrades with improvements & bug fixes
