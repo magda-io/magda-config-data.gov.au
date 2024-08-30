@@ -906,6 +906,8 @@ magda:
           - edu.au
           - nsw.gov.au
           - shared.tern.org.au
+          # for TERN (Australia's Terrestrial Ecosystem Research Network) as well
+          - object-store.rc.nectar.org.au
           
 
       ## Configure the autoscaler
