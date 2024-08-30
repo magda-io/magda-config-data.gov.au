@@ -905,6 +905,7 @@ magda:
           - data.nsw.gov.au
           - edu.au
           - nsw.gov.au
+          - shared.tern.org.au
           
 
       ## Configure the autoscaler
