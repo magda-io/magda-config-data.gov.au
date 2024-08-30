@@ -854,6 +854,12 @@ magda:
           memory: 500Mi
         limits:
           cpu: 250m
+      appConfig:
+        akka:
+          http:
+            client:
+              # increase this setting when encounter connection reset error for downloading large region files
+              idle-timeout: 180s
 
     ## Configures the TerriaJS server responsible for serving preview maps.
     preview-map:
