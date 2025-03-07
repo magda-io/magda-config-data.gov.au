@@ -16,6 +16,10 @@ helm upgrade -n dga-prod magda ./chart --timeout 30000s --install -f config.yaml
 
 # Upgrade Guide:
 
+## v4.2.5
+
+- Upgrade to Magda v4.2.5
+
 ## v4.2.4
 
 - Upgrade to Magda v4.2.4
