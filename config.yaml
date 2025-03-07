@@ -755,7 +755,7 @@ magda:
       ## direct magda equivalents (e.g. the API) to a ckan installation at this domain
       ckanRedirectionDomain: "data.gov.au"
       ckanRedirectionPath: "/data"
-      enableCkanRedirection: true
+      enableCkanRedirection: false
 
       replicas: 2
 
@@ -854,6 +854,8 @@ magda:
           memory: 500Mi
         limits:
           cpu: 250m
+      autoReIndex:
+        schedule: "0 15 * * *"
       appConfig:
         akka:
           http:

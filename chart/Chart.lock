@@ -1,7 +1,7 @@
 dependencies:
 - name: magda
   repository: oci://ghcr.io/magda-io/charts
-  version: 4.2.4
+  version: 4.2.5
 - name: ingress
   repository: file://../ingress
   version: 1.1.0
@@ -101,5 +101,5 @@ dependencies:
 - name: magda-project-open-data-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.0
-digest: sha256:8fdd4c21ab81b6a92d2d205e7f42e791b26322d42e26684a4ea4b8089edce7d1
-generated: "2024-11-15T16:35:11.544342+11:00"
+digest: sha256:ac30dfe570387333db5d016a3012ec674f2bb415cf4aa8c0a6eb8b4d206a2d81
+generated: "2025-03-07T17:24:10.495539+11:00"
