@@ -241,12 +241,14 @@ connector-ga:
     pageSize: 100
     schedule: 0 5 */3 * *
 
-connector-logan:
-  config:
-    id: logan
-    name: Logan City Council
-    sourceUrl: https://data-logancity.opendata.arcgis.com/api/feed/dcat-us/1.1.json
-    schedule: 30 5 */3 * *
+# disable logon connector for now
+# their ArcGis config template needs to be updated
+# connector-logan:
+#   config:
+#     id: logan
+#     name: Logan City Council
+#     sourceUrl: https://data-logancity.opendata.arcgis.com/api/feed/dcat-us/1.1.json
+#     schedule: 30 5 */3 * *
 
 connector-melbournewater:
   config:

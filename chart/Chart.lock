@@ -41,9 +41,6 @@ dependencies:
 - name: magda-project-open-data-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.0
-- name: magda-project-open-data-connector
-  repository: oci://ghcr.io/magda-io/charts
-  version: 2.0.0
 - name: magda-csw-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.2
@@ -101,5 +98,5 @@ dependencies:
 - name: magda-project-open-data-connector
   repository: oci://ghcr.io/magda-io/charts
   version: 2.0.0
-digest: sha256:8fdd4c21ab81b6a92d2d205e7f42e791b26322d42e26684a4ea4b8089edce7d1
-generated: "2024-11-15T16:35:11.544342+11:00"
+digest: sha256:2e7b24bd5a943aac6d108c57dae80e6a152082c6072234d2edd3bd60c3357be8
+generated: "2025-03-25T11:56:29.873781+11:00"

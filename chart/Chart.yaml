@@ -101,13 +101,15 @@ dependencies:
     tags:
       - connectors
       - connector-ga
-  - name: magda-project-open-data-connector
-    version: "2.0.0"
-    alias: connector-logan
-    repository: "oci://ghcr.io/magda-io/charts"
-    tags:
-      - connectors
-      - connector-logan
+  # disable logon connector for now
+  # their ArcGis config template needs to be updated
+  # - name: magda-project-open-data-connector
+  #   version: "2.0.0"
+  #   alias: connector-logan
+  #   repository: "oci://ghcr.io/magda-io/charts"
+  #   tags:
+  #     - connectors
+  #     - connector-logan
   - name: magda-project-open-data-connector
     version: "2.0.0"
     alias: connector-melbournewater
